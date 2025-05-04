@@ -1,0 +1,124 @@
+/* General */
+body {
+    background-color: #222;
+    color: #ddd;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #e53935;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Sección principal de selección de cartas */
+#card-selection .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+#card-selection .card-button {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 10px;
+    width: 220px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    color: #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#card-selection .card-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(229, 57, 53, 0.6); /* Glow dinámico */
+}
+
+#card-selection .card-button img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Sección de Guerreros Seleccionados */
+#selected-warriors {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#selected-warriors .player-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+#selected-warriors .card-space {
+    width: 220px; /* Ajusta el ancho */
+    min-height: 300px;
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#selected-warriors .card-space img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Cartas seleccionadas */
+.selected-card {
+    background-color: #444;
+    border: 2px solid #e53935;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Botones */
+.btn-primary {
+    background-color: #e53935;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 20px auto;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #b71c1c;
+}
+
+button:disabled, .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #e53935;
+    color: #ddd;
+}

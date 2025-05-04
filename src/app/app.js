@@ -49,12 +49,17 @@ app.use('/game/warriors', warriorsRoutes);
 
 // Ruta por defecto
 app.get('/', (req, res) => {
-  res.send('Bienvenido al juego de cartas Warrios');
+  res.sendFile('login.html', { root: path.join(__dirname, 'assets/views') });
 });
 
 // Ruta para servir select-warriors.html
-//app.get('/select-warriors', (req, res) => {
-//  res.sendFile('select-warriors.html', { root: path.join(__dirname, 'assets/views') });
-//});
+app.get('/select-warriors', (req, res) => {
+  res.sendFile('select-warriors.html', { root: path.join(__dirname, 'assets/views') });
+});
+
+// Ruta para servir home.html
+// app.get('/home', (req, res) => {
+//   res.sendFile('home.html', { root: path.join(__dirname, 'assets/views') });
+// });
 
 export default app;

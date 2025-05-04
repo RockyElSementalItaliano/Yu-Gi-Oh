@@ -1,4 +1,4 @@
-import { connect } from '../config/db/connect.js';
+import { connect } from '../config/connect.js';
 
 // Mostrar todos los juegos
 export const showGame = async (req, res) => {

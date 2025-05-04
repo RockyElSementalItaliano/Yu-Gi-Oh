@@ -1,0 +1,154 @@
+/* Estilo general */
+body {
+    background-color: #222;
+    color: #ddd;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Títulos */
+h2 {
+    color: #e53935;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Contenedor principal */
+.container {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+}
+
+/* Botón de área del juego */
+#game-area {
+    background-color: #444;
+    border: 1px solid #666;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Párrafos dentro del área de juego */
+#game-area p {
+    font-family: 'Arial', sans-serif;
+    color: white;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+/* Estilo de botones */
+.btn-primary {
+    background-color: #e53935;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #b71c1c;
+}
+
+.btn-danger {
+    background-color: #e53935;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #b71c1c;
+}
+
+/* Margen superior */
+.mt-4 {
+    margin-top: 20px;
+}
+
+.mt-5 {
+    margin-top: 30px;
+}
+
+/* Texto centrado */
+.text-center {
+    text-align: center;
+}
+
+/* Contenedor de jugadores */
+.player-container {
+    margin-bottom: 20px;
+}
+
+.player-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px; /* Espacio entre el nombre y las cartas */
+}
+
+/* Cartas en espacios */
+.card-space {
+    width: 180px; /* Ajuste para mantener consistencia con select-warriors.html */
+    height: 240px; /* Ajuste para mantener proporción */
+    background-color: #555;
+    border: 1px solid #777;
+    border-radius: 8px;
+    margin: 10px; /* Espacio entre cartas */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden; /* Evitar desbordes */
+}
+
+/* Estilo interno de las cartas */
+.card-space .card {
+    width: 100%; /* Ajusta al tamaño del espacio */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-space .card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Efecto hover en las cartas */
+.card-space .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(229, 57, 53, 0.6); /* Glow dinámico */
+}

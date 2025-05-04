@@ -1,0 +1,71 @@
+body {
+    background-color: #1a1a1a; /* Fondo muy oscuro, casi negro */
+    color: #d1d1d1; /* Texto gris claro */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #e53935; /* Rojo intenso para el título */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em; /* Tamaño de fuente más grande */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para el título */
+}
+
+.container {
+    background-color: #282828; /* Contenedor gris oscuro */
+    border: 1px solid #444; /* Borde gris oscuro */
+    border-radius: 8px;
+    padding: 30px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.btn {
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: block; /* Botones uno encima del otro */
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    margin: 20px auto; /* Centrado y margen */
+    width: 250px; /* Ancho fijo para los botones */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para los botones */
+}
+
+.btn-success {
+    background-color: #333; /* Gris oscuro para el botón "Crear Partida" */
+    color: #d1d1d1;
+}
+
+.btn-success:hover {
+    background-color: #444; /* Gris más claro al pasar el ratón */
+}
+
+.btn-info {
+    background-color: #2a2a2a; /* Gris muy oscuro para el botón "Ranking" */
+    color: #d1d1d1;
+}
+
+.btn-info:hover {
+    background-color: #3a3a3a; /* Gris ligeramente más claro al pasar el ratón */
+}
+
+.mt-4 {
+    margin-top: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
