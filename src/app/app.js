@@ -33,6 +33,8 @@ import rankingRoutes from '../routes/rankingRoutes.js';
 import spellsRoutes from '../routes/spellsRoutes.js';
 import usersRoutes from '../routes/usersRoutes.js';
 import warriorsRoutes from '../routes/warriorsRoutes.js'; 
+import typeWarriorRoutes from '../routes/typeWarriorRoutes.js';
+import powerRoutes from '../routes/powerRoutes.js';
 
 // Declaración de rutas
 app.use('/game/auth', authRoutes);
@@ -46,6 +48,8 @@ app.use('/game/ranking', rankingRoutes);
 app.use('/game/spells', spellsRoutes);
 app.use('/game/users', usersRoutes);
 app.use('/game/warriors', warriorsRoutes);
+app.use('/game/typewarriors', typeWarriorRoutes);
+app.use('/game/powers', powerRoutes);
 
 // Ruta por defecto
 app.get('/', (req, res) => {
