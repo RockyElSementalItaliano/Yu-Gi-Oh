@@ -52,6 +52,11 @@ app.get('/', (req, res) => {
   res.sendFile('login.html', { root: path.join(__dirname, 'assets/views') });
 });
 
+// Ruta para servir register.html
+app.get('/register.html', (req, res) => {
+  res.sendFile('register.html', { root: path.join(__dirname, 'assets/views') });
+});
+
 // Ruta para servir select-warriors.html
 app.get('/select-warriors', (req, res) => {
   res.sendFile('select-warriors.html', { root: path.join(__dirname, 'assets/views') });

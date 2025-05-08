@@ -19,7 +19,7 @@ const registerUser = async () => {
 
   try {
     // Enviar solicitud al backend
-    const response = await fetch('http://localhost:3000/game/auth/register', {
+    const response = await fetch('/game/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
@@ -29,7 +29,7 @@ const registerUser = async () => {
 
     if (response.ok) {
       alert('Usuario registrado con éxito. ¡Ya puedes iniciar sesión!');
-      window.location.href = 'http://127.0.0.1:5500/game/src/app/assets/views/login.html'; // Redirigir al login
+      window.location.href = '/assets/views/login.html'; // Redirigir al login
     } else {
       alert('Error: ' + result.error);
     }
@@ -63,7 +63,7 @@ const loginUser = async () => {
 
   try {
     // Enviar solicitud al backend
-    const response = await fetch('http://localhost:3000/game/auth/login', {
+    const response = await fetch('/game/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
@@ -77,7 +77,7 @@ const loginUser = async () => {
       // Guardar los datos del usuario en LocalStorage
       localStorage.setItem('user', JSON.stringify(result));
       // Redirigir al home del juego
-      window.location.href = 'http://127.0.0.1:5500/game/src/app/assets/views/home.html';
+      window.location.href = '/assets/views/home.html';
     } else {
       // Mostrar mensaje de error
       alert('Error: ' + (result.message || 'Credenciales inválidas'));
