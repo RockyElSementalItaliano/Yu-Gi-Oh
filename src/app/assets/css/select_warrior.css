@@ -1,11 +1,15 @@
 /* General */
 body {
-    background-color: #222;
-    color: #ddd;
-    font-family: 'Arial', sans-serif;
+    background-image: url('https://i.pinimg.com/736x/d8/69/01/d86901eb32e419e450385580d21a1ba9.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
-}
+    font-family: Arial, sans-serif;
+  }
+  
 
 h1, h2 {
     color: #e53935;

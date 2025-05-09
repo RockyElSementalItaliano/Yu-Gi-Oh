@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedPlayer2Cards = JSON.parse(localStorage.getItem('player2Cards')) || [];
 
     if (savedPlayer1Cards.length === 0 || savedPlayer2Cards.length === 0) {
-      alert('No hay cartas seleccionadas en localStorage. Verifica select-warriors.html.');
+      // alert('No hay cartas seleccionadas en localStorage. Verifica select-warriors.html.');
       return;
     }
 

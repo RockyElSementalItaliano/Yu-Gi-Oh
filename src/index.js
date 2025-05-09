@@ -10,7 +10,7 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 
 import app from './app/app.js';
 
-const PORT = process.env.PORT || 5500; // Permitir configuración dinámica del puerto
+const PORT = process.env.PORT || 3000; // Cambiar puerto por defecto a 3000 para npm run dev
 
 // Iniciar el servidor
 app.listen(PORT, () => {

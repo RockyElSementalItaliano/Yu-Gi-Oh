@@ -8,57 +8,61 @@
   <link rel="stylesheet" href="/assets/css/cards.css" />
 </head>
 <body>
-  <h1 class="text-center mt-4">Crear Nueva Carta</h1>
-  <div class="container mt-4">
-    <form id="create-card-form" enctype="multipart/form-data">
-      <div class="form-group">
-        <label for="name">Nombre de la Carta:</label>
-        <input type="text" id="name" name="name" class="form-control" required />
-      </div>
-
-      <div class="form-group">
-        <label for="race_id">Raza:</label>
-        <select id="race_id" name="race_id" class="form-control" required>
-          <option value="">Seleccione una raza</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="power_id">Poder:</label>
-        <select id="power_id" name="power_id" class="form-control" required>
-          <option value="">Seleccione un poder</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="spell_id">Hechizo:</label>
-        <select id="spell_id" name="spell_id" class="form-control" required>
-          <option value="">Seleccione un hechizo</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="type_warrior_id">Tipo de Guerrero:</label>
-        <select id="type_warrior_id" name="type_warrior_id" class="form-control" required>
-          <option value="">Seleccione un tipo</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="image_url">Imagen de la Carta:</label>
-        <input type="file" id="image_url" name="image_url" class="form-control-file" accept="image/*" required />
-      </div>
-
-      <div class="form-group">
-        <label for="description">Descripción:</label>
-        <textarea id="description" name="description" class="form-control" rows="4" placeholder="Redacta una descripción..." required></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Crear Carta</button>
-    </form>
-    <div id="form-message" class="mt-3"></div>
+<button id="show-form-button" class="btn btn-link text-center mt-4" style="text-decoration: none; font-size: 1.5em;">Crear Nueva Carta</button>
+<div id="create-card-form-container" class="container mt-4" style="display: none;">
+  <div class="d-flex justify-content-end mb-2">
+    <button id="close-form-button" type="button" class="btn btn-secondary btn-sm">Cerrar</button>
   </div>
+  <form id="create-card-form" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="name">Nombre de la Carta:</label>
+      <input type="text" id="name" name="name" class="form-control" required />
+    </div>
 
+    <div class="form-group">
+      <label for="race_id">Raza:</label>
+      <select id="race_id" name="race_id" class="form-control" required>
+        <option value="">Seleccione una raza</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="power_id">Poder:</label>
+      <select id="power_id" name="power_id" class="form-control" required>
+        <option value="">Seleccione un poder</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="spell_id">Hechizo:</label>
+      <select id="spell_id" name="spell_id" class="form-control" required>
+        <option value="">Seleccione un hechizo</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="type_warrior_id">Tipo de Guerrero:</label>
+      <select id="type_warrior_id" name="type_warrior_id" class="form-control" required>
+        <option value="">Seleccione un tipo</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="image_url">Imagen de la Carta:</label>
+      <input type="file" id="image_url" name="image_url" class="form-control-file" accept="image/*" required />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descripción:</label>
+      <textarea id="description" name="description" class="form-control" rows="4" placeholder="Redacta una descripción..." required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Carta</button>
+  </form>
+  <div id="form-message" class="mt-3"></div>
+</div>
+
+  <button onclick="location.href='home.html'">Regresar al inicio</button>
   <script src="../js/createCards.js" defer></script>
 
 </body>

@@ -24,6 +24,8 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 // Importación de rutas utilizando ES6
 import authRoutes from '../routes/authRoutes.js';
 import cardsRoutes from '../routes/cardsRoutes.js';
+import multer from 'multer';
+import multerConfig from '../config/multerConfig.js';
 import fightRoutes from '../routes/fightRoutes.js';
 import gameRoutes from '../routes/gameRoutes.js';
 import matchesRoutes from '../routes/matchesRoutes.js';
@@ -65,6 +67,11 @@ app.get('/register.html', (req, res) => {
 app.get('/select-warriors', (req, res) => {
   res.sendFile('select-warriors.html', { root: path.join(__dirname, 'assets/views') });
 });
+
+// Servir archivos estáticos para js y css desde assets
+app.use('/js', express.static(path.join(__dirname, 'assets/js')));
+app.use('/css', express.static(path.join(__dirname, 'assets/css')));
+app.use('/img', express.static(path.join(__dirname, 'assets/img')));
 
 // Ruta para servir home.html
 // app.get('/home', (req, res) => {

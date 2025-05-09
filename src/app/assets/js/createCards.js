@@ -1,3 +1,16 @@
+const showFormButton = document.getElementById('show-form-button');
+  const createCardFormContainer = document.getElementById('create-card-form-container');
+  const closeFormButton = document.getElementById('close-form-button');
+
+  showFormButton.addEventListener('click', () => {
+    createCardFormContainer.style.display = 'block';
+    showFormButton.style.display = 'none';
+  });
+
+  closeFormButton.addEventListener('click', () => {
+    createCardFormContainer.style.display = 'none';
+    showFormButton.style.display = 'block';
+  });
 // Función para cargar opciones desde la API
 async function loadOptions(endpoint, selectId) {
   try {

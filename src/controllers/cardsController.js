@@ -42,7 +42,8 @@ export const addCard = async (req, res) => {
     }
 
     console.log('Ruta imagen subida:', imageFile.path);
-    const image_url = imageFile.path; // Obtener la ruta de la imagen subida
+    const path = await import('path');
+    const image_url = path.basename(imageFile.path); // Guardar solo el nombre del archivo
 
     const sqlQuery = "INSERT INTO warriors (name, race_id, power_id, spell_id, image_url, description, type_warrior_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     const [result] = await connect.query(sqlQuery, [name, race_id, power_id, spell_id, image_url, description, type_warrior_id]);
