@@ -1,3 +1,37 @@
+body {
+    background-image: url('https://i.pinimg.com/736x/d8/69/01/d86901eb32e419e450385580d21a1ba9.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+ 
+#create-card-form-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 20px; /* Espacio interno */
+            position: fixed; /* Para centrarlo en la pantalla */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centrarlo correctamente */
+            z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+            width: 80%; /* Ancho del formulario */
+            max-width: 600px; /* Ancho máximo */
+        }
+
+        #close-form-button {
+            margin-bottom: 10px; /* Espacio debajo del botón cerrar */
+        }
+
+        #show-form-button {
+            display: block; /* Asegurar que el botón ocupe todo el ancho */
+            margin: 20px auto; /* Centrar el botón */
+        }
+
+
 .cards-container {
     display: flex;
     flex-wrap: wrap;
