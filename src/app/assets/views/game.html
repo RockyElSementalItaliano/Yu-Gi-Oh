@@ -1,48 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="language" content="es">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="language" content="es" />
     <title>Juego de Guerreros - Batalla</title>
-    <link rel="stylesheet" href="../css/game.css">
-    
+    <link rel="stylesheet" href="../css/game.css" />
 </head>
 <body>
     <div class="container text-center mt-5">
         <h1>¡Batalla en Progreso!</h1>
 
-        <!-- Contenedor de Jugador 1 -->
-        <div class="player-container">
-            <h3>Jugador 1</h3>
-            <div id="player1-cards" class="player-cards">
-                <div class="card-space"></div>
-                <div class="card-space"></div>
-                <div class="card-space"></div>
-                <div class="card-space"></div>
-                <div class="card-space"></div>
+        <div class="battle-layout">
+            <!-- Entrenador Jugador 1 - lado izquierdo -->
+            <div id="player1-trainer-info" class="trainer-info trainer-left">
+                <div id="player1-trainer-image" class="trainer-image"></div>
+                <p id="player1-trainer-name" class="trainer-name"></p>
+            </div>
+
+            <!-- Área de cartas -->
+            <div class="cards-area">
+                <!-- Contenedor de Jugador 1 -->
+                <div class="player-container">
+                    <h3>Jugador 1</h3>
+                    <div id="player1-cards" class="player-cards">
+                        <div class="card-space"></div>
+                        <div class="card-space"></div>
+                        <div class="card-space"></div>
+                        <div class="card-space"></div>
+                        <div class="card-space"></div>
+                    </div>
+                </div>
+
+                <!-- Botón para iniciar batalla -->
+                <button id="game-area" class="btn-primary mt-4" disabled>¡Iniciar Batalla!</button>
+
+                <!-- Contenedor de Jugador 2 -->
+                <div class="player-container">
+                    <h3>Jugador 2</h3>
+                    <div id="player2-cards" class="player-cards">
+                        <div class="card-space"></div>
+                        <div class="card-space"></div>
+                        <div class="card-space"></div>
+                        <div class="card-space"></div>
+                        <div class="card-space"></div>
+                    </div>
+                </div>
+
+                <!-- Botón para finalizar y ver resultados -->
+                <button id="finalize-button" disabled onclick="location.href='ranking.html'">Finalizar</button>
+            </div>
+
+            <!-- Entrenador Jugador 2 - lado derecho -->
+            <div id="player2-trainer-info" class="trainer-info trainer-right">
+                <div id="player2-trainer-image" class="trainer-image"></div>
+                <p id="player2-trainer-name" class="trainer-name"></p>
             </div>
         </div>
-
-        <!-- Botón para iniciar batalla -->
-        <button id="game-area" class="btn-primary mt-4" disabled>¡Iniciar Batalla!</button>
-
-        <!-- Contenedor de Jugador 2 -->
-        <div class="player-container">
-            <h3>Jugador 2</h3>
-            <div id="player2-cards" class="player-cards">
-                <div class="card-space"></div>
-                <div class="card-space"></div>
-                <div class="card-space"></div>
-                <div class="card-space"></div>
-                <div class="card-space"></div>
-            </div>
-        </div>
-
-        <!-- Botón para finalizar y ver resultados -->
-        <button id="finalize-button" disabled>Finalizar</button>
     </div>
-    <script src="../js/gameCards.js" defer></script>
-
+    <script type="module" src="../js/gameCards.js" defer></script>
+    <script type="module" src="../js/gameTrainerDisplay.js" defer></script>
+    <script type="module" src="../js/gameRenderSelectedCards.js" defer></script>
 </body>
 </html>

@@ -28,3 +28,15 @@ export class WarriorService {
         }
     }
 }
+
+// Nuevo método para obtener entrenadores
+export async function getTrainers() {
+    try {
+        const response = await fetch('http://localhost:3000/game/trainers');
+        if (!response.ok) throw new Error('Error al obtener entrenadores');
+        return await response.json();
+    } catch (error) {
+        console.error('Error al obtener entrenadores:', error);
+        throw error;
+    }
+}

@@ -37,6 +37,7 @@ import usersRoutes from '../routes/usersRoutes.js';
 import warriorsRoutes from '../routes/warriorsRoutes.js'; 
 import typeWarriorRoutes from '../routes/typeWarriorRoutes.js';
 import powerRoutes from '../routes/powerRoutes.js';
+import trainerRoutes from '../routes/trainerRoutes.js';
 
 // Declaración de rutas
 app.use('/game/auth', authRoutes);
@@ -52,6 +53,7 @@ app.use('/game/users', usersRoutes);
 app.use('/game/warriors', warriorsRoutes);
 app.use('/game/typewarriors', typeWarriorRoutes);
 app.use('/game/powers', powerRoutes);
+app.use('/game/trainers', trainerRoutes);
 
 // Ruta por defecto
 app.get('/', (req, res) => {

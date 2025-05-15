@@ -11,14 +11,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetSelectionBtn = document.getElementById('reset-selection');
     const battleLink = document.querySelector('a[href="game.html"]');
 
+    const player1TrainerSelect = document.getElementById('player1-trainers');
+    const player2TrainerSelect = document.getElementById('player2-trainers');
+
     if (battleLink) {
         battleLink.addEventListener('click', (e) => {
+            const player1TrainerName = player1TrainerSelect.options[player1TrainerSelect.selectedIndex]?.text || 'Jugador 1';
+            const player2TrainerName = player2TrainerSelect.options[player2TrainerSelect.selectedIndex]?.text || 'Jugador 2';
+
             if (selectedCards[1].length !== 5 || selectedCards[2].length !== 5) {
                 e.preventDefault();
-                alert('Ambos jugadores deben seleccionar 5 cartas para comenzar la batalla.');
+                alert(`Ambos jugadores deben seleccionar 5 cartas para comenzar la batalla.`);
+                return;
+            }
+            if (!player1TrainerSelect.value || !player2TrainerSelect.value) {
+                e.preventDefault();
+                alert(`Ambos jugadores deben seleccionar un entrenador para comenzar la batalla.`);
                 return;
             }
             localStorage.setItem('selectedCards', JSON.stringify(selectedCards));
+            localStorage.setItem('selectedTrainers', JSON.stringify({
+                player1: player1TrainerSelect.value,
+                player2: player2TrainerSelect.value
+            }));
         });
     }
 
