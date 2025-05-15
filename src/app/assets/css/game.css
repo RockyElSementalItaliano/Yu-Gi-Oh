@@ -110,8 +110,8 @@ h1, h2, h3 {
 }
 
 .card-space {
-    width: 140px;
-    min-height: 200px;
+    width: 220px;
+    height: 300px;
     background-color: #333;
     border: 1px solid #555;
     border-radius: 8px;
@@ -124,6 +124,7 @@ h1, h2, h3 {
     overflow: hidden;
     flex-shrink: 0;
 }
+
 
 .card-container {
     border: 1px solid #e53935;
@@ -175,6 +176,37 @@ h1, h2, h3 {
     text-align: center;
     box-shadow: 0 0 10px rgba(0,0,0,0.7);
     z-index: 10;
+}
+
+.card-button {
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 10px;
+    width: 220px;
+    max-height: 300px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    color: #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(229, 57, 53, 0.6);
+}
+
+.card-button img, .card-image {
+    max-width: 100%;
+    max-height: 260px;
+    width: auto;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .trainer-top-right {
