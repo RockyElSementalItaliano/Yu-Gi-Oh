@@ -1,43 +1,39 @@
 import jwt from 'jsonwebtoken';
 import { connect } from '../config/db/connect.js';
 import { encryptPassword, comparePassword} from '../library/appBcrypt.js';
+
 // Registro de un nuevo usuario
 export const registerUser = async (req, res) => {
   try {
     const { username, password } = req.body;
+    const role = 'player'; // Forzar rol player al registrar
 
-    // Validación de campos obligatorios
     if (!username || !password) {
       return res.status(400).json({ error: 'El nombre de usuario y la contraseña son obligatorios.' });
     }
 
-    // Verificar si el usuario ya existe
     const CHECK_USER_QUERY = 'SELECT * FROM users WHERE username = ?';
     const [existingUser] = await connect.query(CHECK_USER_QUERY, [username]);
     if (existingUser.length > 0) {
       return res.status(400).json({ error: 'El nombre de usuario ya está registrado.' });
     }
 
-    // Encriptar la contraseña
     const hashedPassword = await encryptPassword(password);
 
-    // Insertar el nuevo usuario
-    const INSERT_USER_QUERY = 'INSERT INTO users (username, password) VALUES (?, ?, NOW())';
-    const [result] = await connect.query(INSERT_USER_QUERY, [username, hashedPassword]);
+    const INSERT_USER_QUERY = 'INSERT INTO users (username, password, role) VALUES (?, ?, ?)';
+    const [result] = await connect.query(INSERT_USER_QUERY, [username, hashedPassword, role]);
 
-    // Generar token JWT para el nuevo usuario
     const token = jwt.sign(
-      { id: result.insertId, username },
+      { id: result.insertId, username, role },
       process.env.JWT_SECRET,
-      { expiresIn: '1h', algorithm: 'HS256' } // Asegúrate de que el algoritmo sea compatible con tu configuración
+      { expiresIn: '1h', algorithm: 'HS256' }
     );
 
     res.status(201).json({
       message: 'Usuario registrado con éxito.',
-      data: { id: result.insertId, username, token },
+      data: { id: result.insertId, username, role, token },
     });
   } catch (error) {
-    // Manejo de errores
     if (error.code === 'ER_DUP_ENTRY') {
       return res.status(400).json({ error: 'El nombre de usuario ya está registrado.' });
     }
@@ -50,33 +46,39 @@ export const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Validación básica
+    console.log('Credenciales recibidas:', username, password);
+
     if (!username || !password) {
       return res.status(400).json({ error: "Username and password are required" });
     }
 
-    let sqlQuery = "SELECT * FROM users WHERE username = ?";
+    const sqlQuery = "SELECT * FROM users WHERE username = ?";
     const [result] = await connect.query(sqlQuery, [username]);
 
-    // Verificar si el usuario existe
+    console.log('Resultado consulta usuario:', result);
+
     if (result.length === 0) {
-      return res.status(400).json({ error: "User not found" });
+      console.log('Usuario no encontrado:', username);
+      return res.status(401).json({ error: "User not found" });
     }
 
     const user = result[0];
-    console.log("User found:", user); // Depuración para validar datos del usuario.
 
-    // Verificación de contraseña
-    const validPassword = await comparePassword(password, user.password); // Asegúrate de usar bcrypt aquí.
+    const validPassword = await comparePassword(password, user.password);
     if (!validPassword) {
-      return res.status(400).json({ error: "Incorrect password" });
+      return res.status(401).json({ error: "Incorrect password" });
     }
 
-    // Generar token JWT
+    const allowedRoles = ['admin', 'player'];
+    if (!allowedRoles.includes(user.role)) {
+      return res.status(403).json({ error: "Rol de usuario no permitido" });
+    }
+
     const token = jwt.sign(
       {
         id: user.id,
         username: user.username,
+        role: user.role
       },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
@@ -84,7 +86,25 @@ export const loginUser = async (req, res) => {
 
     res.json({ token });
   } catch (error) {
-    console.error("Error during login:", error); // Depuración para errores internos
+    console.error("Error during login:", error);
     res.status(500).json({ error: "Error during login", details: error.message });
+  }
+};
+
+// Endpoint de prueba para verificar existencia de usuario
+export const checkUserExists = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const sqlQuery = "SELECT * FROM users WHERE username = ?";
+    const [result] = await connect.query(sqlQuery, [username]);
+
+    if (result.length === 0) {
+      return res.status(404).json({ exists: false, message: "Usuario no encontrado" });
+    }
+
+    res.json({ exists: true, user: result[0] });
+  } catch (error) {
+    console.error("Error checking user existence:", error);
+    res.status(500).json({ error: "Error checking user existence", details: error.message });
   }
 };

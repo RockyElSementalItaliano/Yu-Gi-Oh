@@ -85,7 +85,7 @@ export const deleteFight = async (req, res) => {
 // Calcular ganador basado en suma de power y spell
 export const calculateWinner = async (req, res) => {
   try {
-    const { player1Warriors, player2Warriors } = req.body;
+    const { player1Warriors, player2Warriors, player1TrainerId, player2TrainerId } = req.body;
 
     if (!Array.isArray(player1Warriors) || !Array.isArray(player2Warriors)) {
       return res.status(400).json({ error: "player1Warriors y player2Warriors deben ser arrays de IDs" });
@@ -114,6 +114,36 @@ export const calculateWinner = async (req, res) => {
     if (player1Total > player2Total) winner = 'player1';
     else if (player2Total > player1Total) winner = 'player2';
     else winner = 'draw';
+
+    // Función para insertar registro en ranking si no existe
+    const insertRankingIfNotExists = async (trainerId) => {
+      const [rows] = await connect.query('SELECT * FROM ranking WHERE trainer_id = ?', [trainerId]);
+      if (rows.length === 0) {
+        await connect.query('INSERT INTO ranking (trainer_id, wins, losses, draws) VALUES (?, 0, 0, 0)', [trainerId]);
+      }
+    };
+
+    // Insertar registros si no existen
+    await insertRankingIfNotExists(player1TrainerId);
+    await insertRankingIfNotExists(player2TrainerId);
+
+    // Actualizar ranking
+    const updateRanking = async (trainerId, field) => {
+      const sql = `UPDATE ranking SET ${field} = ${field} + 1 WHERE trainer_id = ?`;
+      await connect.query(sql, [trainerId]);
+    };
+
+    if (winner === 'player1') {
+      await updateRanking(player1TrainerId, 'wins');
+      await updateRanking(player2TrainerId, 'losses');
+    } else if (winner === 'player2') {
+      await updateRanking(player2TrainerId, 'wins');
+      await updateRanking(player1TrainerId, 'losses');
+    } else {
+      // Empate
+      await updateRanking(player1TrainerId, 'draws');
+      await updateRanking(player2TrainerId, 'draws');
+    }
 
     res.status(200).json({
       player1Total,

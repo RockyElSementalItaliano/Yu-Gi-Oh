@@ -1,10 +1,11 @@
 import { connect } from '../config/db/connect.js';
+import { getAllTrainers } from '../models/trainerModel.js';
 
 // Mostrar el ranking completo
 export const showRanking = async (req, res) => {
   try {
-    const sqlQuery = `SELECT r.*, u.username FROM ranking JOIN users u ON r.user_id = u.id 
-      ORDER BY wins DESC, draws DESC, losses AS`; // Ordena el ranking por victorias y empates
+    const sqlQuery = `SELECT r.*, t.name AS trainer_name FROM ranking r JOIN trainer t ON r.trainer_id = t.id 
+      ORDER BY wins DESC, draws DESC, losses ASC`; // Ordena el ranking por victorias, empates y derrotas
     const [result] = await connect.query(sqlQuery);
     res.status(200).json(result); // Devuelve el ranking
   } catch (error) {
@@ -12,15 +13,15 @@ export const showRanking = async (req, res) => {
   }
 };
 
-// Mostrar el ranking de un jugador por ID
+// Mostrar el ranking de un entrenador por ID
 export const showRankingId = async (req, res) => {
   try {
     const sqlQuery = `
-      SELECT r.*, u.username 
+      SELECT r.*, t.name AS trainer_name 
       FROM ranking r 
-      JOIN users u ON r.user_id = u.id 
+      JOIN trainer t ON r.trainer_id = t.id 
       WHERE r.id = ?
-    `; // Muestra el ranking específico con detalles de usuario
+    `; // Muestra el ranking específico con detalles de entrenador
     const [result] = await connect.query(sqlQuery, [req.params.id]);
     if (result.length === 0) return res.status(404).json({ error: "Ranking not found" });
     res.status(200).json(result[0]); // Devuelve el ranking encontrado
@@ -32,17 +33,17 @@ export const showRankingId = async (req, res) => {
 // Agregar un nuevo registro al ranking
 export const addRanking = async (req, res) => {
   try {
-    const { user_id, wins, losses, draws } = req.body; // Datos necesarios para registrar
-    if (!user_id || wins === undefined || losses === undefined || draws === undefined) {
+    const { trainer_id, wins, losses, draws } = req.body; // Datos necesarios para registrar
+    if (!trainer_id || wins === undefined || losses === undefined || draws === undefined) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const sqlQuery = "INSERT INTO ranking (user_id, wins, losses, draws) VALUES (?, ?, ?, ?)";
-    const [result] = await connect.query(sqlQuery, [user_id, wins, losses, draws]);
+    const sqlQuery = "INSERT INTO ranking (trainer_id, wins, losses, draws) VALUES (?, ?, ?, ?)";
+    const [result] = await connect.query(sqlQuery, [trainer_id, wins, losses, draws]);
 
     res.status(201).json({
       message: "Ranking added successfully",
-      data: { id: result.insertId, user_id, wins, losses, draws }
+      data: { id: result.insertId, trainer_id, wins, losses, draws }
     });
   } catch (error) {
     res.status(500).json({ error: "Error adding ranking", details: error.message });
@@ -85,5 +86,27 @@ export const deleteRanking = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: "Error deleting ranking", details: error.message });
+  }
+};
+
+// Inicializar ranking con entrenadores existentes
+export const initializeRanking = async (req, res) => {
+  try {
+    const trainers = await getAllTrainers();
+
+    for (const trainer of trainers) {
+      // Insertar solo si no existe ya un registro para ese entrenador
+      const [existing] = await connect.query('SELECT * FROM ranking WHERE trainer_id = ?', [trainer.id]);
+      if (existing.length === 0) {
+        await connect.query(
+          'INSERT INTO ranking (trainer_id, wins, losses, draws) VALUES (?, 0, 0, 0)',
+          [trainer.id]
+        );
+      }
+    }
+
+    res.status(200).json({ message: 'Ranking inicializado con entrenadores existentes' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error inicializando ranking', details: error.message });
   }
 };

@@ -1,23 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ranking</title>
-    <link rel="stylesheet" href="../css/ranking.css">
+    <link rel="stylesheet" href="../css/ranking.css" />
 </head>
 <body>
-    <h1>Ranking de Jugadores</h1>
-    <table id="ranking-table">
+    <h1>Ranking de Entrenadores</h1>
+
+    <div id="summary-boxes" style="display: flex; gap: 20px; margin-bottom: 20px;">
+        <div style="padding: 10px; border: 1px solid #ccc; width: 120px; text-align: center;">
+            <h3>Victorias</h3>
+            <p id="total-wins">0</p>
+        </div>
+        <div style="padding: 10px; border: 1px solid #ccc; width: 120px; text-align: center;">
+            <h3>Empates</h3>
+            <p id="total-draws">0</p>
+        </div>
+        <div style="padding: 10px; border: 1px solid #ccc; width: 120px; text-align: center;">
+            <h3>Derrotas</h3>
+            <p id="total-losses">0</p>
+        </div>
+    </div>
+
+    <table id="ranking-table" border="1" cellspacing="0" cellpadding="8" style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr>
-                <th>Nombre del Jugador</th>
+                <th>#</th>
+                <th>Nombre del Entrenador</th>
                 <th>Victorias</th>
+                <th>Empates</th>
+                <th>Derrotas</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Se llenará dinámicamente -->
         </tbody>
     </table>
+
     <button onclick="location.href='home.html'">Regresar al inicio</button>
+
+    <script src="../js/ranking.js"></script>
 </body>
 </html>

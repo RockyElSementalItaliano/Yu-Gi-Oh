@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedTrainersJSON = localStorage.getItem('selectedTrainers');
         let player1TrainerName = 'Jugador 1';
         let player2TrainerName = 'Jugador 2';
+        let player1TrainerId = null;
+        let player2TrainerId = null;
 
         if (selectedTrainersJSON) {
             const selectedTrainers = JSON.parse(selectedTrainersJSON);
@@ -97,8 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const trainers = await getTrainers();
                 const trainer1 = trainers.find(t => t.id == selectedTrainers.player1);
                 const trainer2 = trainers.find(t => t.id == selectedTrainers.player2);
-                if (trainer1) player1TrainerName = trainer1.name;
-                if (trainer2) player2TrainerName = trainer2.name;
+                if (trainer1) {
+                    player1TrainerName = trainer1.name;
+                    player1TrainerId = trainer1.id;
+                }
+                if (trainer2) {
+                    player2TrainerName = trainer2.name;
+                    player2TrainerId = trainer2.id;
+                }
             } catch (error) {
                 console.error('Error al obtener entrenadores:', error);
             }
@@ -108,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/game/fight/winner', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ player1Warriors, player2Warriors })
+                body: JSON.stringify({ player1Warriors, player2Warriors, player1TrainerId, player2TrainerId })
             });
             const data = await response.json();
             if (response.ok) {
@@ -126,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     gameAreaBtn.addEventListener('click', () => {
+        gameAreaBtn.disabled = true; // Deshabilitar el botón tras el primer clic
         calculateWinner();
     });
 
