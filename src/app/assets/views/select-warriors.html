@@ -2,61 +2,74 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="language" content="es">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="language" content="es" />
     <title>Juego de Guerreros - Selección de Cartas</title>
-    <link rel="stylesheet" href="../css/select_warrior.css">
+    <link rel="stylesheet" href="../css/select_warrior.css" />
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <h1>Juego de Guerreros</h1>
+    <!-- Navbar fijo -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Juego de Guerreros</a>
+        <button class="btn btn-outline-light" onclick="location.href='playerPanel.html'">Regresar al inicio</button>
+      </div>
+    </nav>
 
-    <div id="card-selection">
-        <h2>Elige tu Guerrero</h2>
-        <div class="cards" id="warriors-container">
-            <!-- Las cartas se cargarán dinámicamente desde la base de datos -->
+    <div class="container mt-4">
+        <div id="card-selection" class="mb-5">
+            <h2>Elige tu Guerrero</h2>
+            <div class="cards d-flex flex-wrap justify-content-center" id="warriors-container">
+                <!-- Las cartas se cargarán dinámicamente desde la base de datos -->
+            </div>
+        </div>
+
+        <div id="selected-warriors">
+            <h2>Guerreros Seleccionados</h2>
+            <div class="d-flex justify-content-center gap-4 mb-4 flex-wrap">
+                <div id="player1-cards" class="player-cards d-flex gap-2">
+                    <h3 class="w-100">Jugador 1</h3>
+                    <div class="trainer-select-container d-flex align-items-center mb-3 w-100">
+                        <select id="player1-trainers" class="form-select me-3"></select>
+                        <div id="player1-trainer-image" class="trainer-image-circle"></div>
+                    </div>
+                    <div class="card-space me-2"></div>
+                    <div class="card-space me-2"></div>
+                    <div class="card-space me-2"></div>
+                    <div class="card-space me-2"></div>
+                    <div class="card-space me-2"></div>
+                </div>
+                <div id="player2-cards" class="player-cards d-flex gap-2">
+                    <h3 class="w-100">Jugador 2</h3>
+                    <div class="trainer-select-container d-flex align-items-center mb-3 w-100">
+                        <select id="player2-trainers" class="form-select me-3"></select>
+                        <div id="player2-trainer-image" class="trainer-image-circle"></div>
+                    </div>
+                    <div class="card-space me-2"></div>
+                    <div class="card-space me-2"></div>
+                    <div class="card-space me-2"></div>
+                    <div class="card-space me-2"></div>
+                    <div class="card-space me-2"></div>
+                </div>
+            </div>
+            <div class="d-flex gap-3 flex-wrap">
+                <button id="start-player1" class="btn btn-primary">Comenzar Jugador 1</button>
+                <button id="start-player2" class="btn btn-primary" disabled>Comenzar Jugador 2</button>
+                <a href="game.html" class="btn btn-primary">¡Ir a la Batalla!</a>
+                <button id="reset-selection" class="btn btn-secondary">Volver a Seleccionar</button>
+            </div>
         </div>
     </div>
 
-    <div id="selected-warriors">
-        <h2>Guerreros Seleccionados</h2>
-        <div id="player1-cards" class="player-cards">
-            <h3>Jugador 1</h3>
-            <div class="trainer-select-container">
-                <select id="player1-trainers" ></select>
-                <div id="player1-trainer-image" class="trainer-image-circle"></div>
-            </div>
-            <div class="card-space"></div>
-            <div class="card-space"></div>
-            <div class="card-space"></div>
-            <div class="card-space"></div>
-            <div class="card-space"></div>
-        </div>
-        <div id="player2-cards" class="player-cards">
-            <h3>Jugador 2</h3>
-            <div class="trainer-select-container">
-                <select id="player2-trainers" ></select>
-                <div id="player2-trainer-image" class="trainer-image-circle"></div>
-            </div>
-            <div class="card-space"></div>
-            <div class="card-space"></div>
-            <div class="card-space"></div>
-            <div class="card-space"></div>
-            <div class="card-space"></div>
-        </div>
-        <button id="start-player1" class="btn-primary">Comenzar Jugador 1</button>
-        <button id="start-player2" class="btn-primary" disabled>Comenzar Jugador 2</button>
-        <a href="game.html" class="btn-primary">¡Ir a la Batalla!</a>
-        <button id="reset-selection">Volver a Seleccionar</button>
-    </div>
-    <button onclick="location.href='playerPanel.html'">Regresar al inicio</button>
-
-
+    <!-- Bootstrap JS Bundle CDN (Popper + Bootstrap JS) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/warriorService.js"></script>
     <script type="module" src="../js/selectWarrior.js"></script>
     <script type="module" src="../js/trainer.js"></script>
-
 </body>
 
 </html>

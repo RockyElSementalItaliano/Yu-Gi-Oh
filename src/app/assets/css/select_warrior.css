@@ -1,14 +1,14 @@
 body {
-    background-image: url('https://i.pinimg.com/736x/d8/69/01/d86901eb32e419e450385580d21a1ba9.jpg');
+    background-image: url('https://wallpapers.com/images/featured/720p-5wfq1i9etj969c3k.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
     margin: 0;
     padding: 0;
+    padding-top: 70px; /* Altura del navbar fijo */
     font-family: Arial, sans-serif;
 }
-
 
 h1,
 h2 {
@@ -29,28 +29,31 @@ h2 {
 #card-selection .card-button {
     background-color: #333;
     border: 1px solid #555;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 10px;
     width: 220px;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     color: #ddd;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
 }
 
 #card-selection .card-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(229, 57, 53, 0.6);
+    box-shadow: 0 0 20px rgba(229, 57, 53, 0.8);
     /* Glow dinámico */
 }
 
 #card-selection .card-button img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
+    width: 180px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #e53935;
     margin-bottom: 10px;
 }
 
@@ -71,10 +74,10 @@ h2 {
 #selected-warriors .card-space {
     width: 220px;
     /* Ajusta el ancho */
-    min-height: 300px;
-    background-color: #333;
-    border: 1px solid #555;
-    border-radius: 8px;
+    min-height: 320px;
+    background-color: #222;
+    border: 4px solid #d32f2f; /* borde rojo estilizado */
+    border-radius: 16px;
     margin: 10px;
     padding: 10px;
     overflow: hidden;
@@ -82,24 +85,58 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    box-shadow: 0 0 15px rgba(211, 47, 47, 0.8);
+    transition: box-shadow 0.3s ease;
+}
+
+#selected-warriors .card-space:hover {
+    box-shadow: 0 0 25px rgba(229, 57, 53, 1);
 }
 
 #selected-warriors .card-space img {
-    max-width: 80%;
-    height: auto;
-    border-radius: 4px;
+    width: 180px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #b71c1c;
     margin-bottom: 10px;
+}
+
+#selected-warriors .card-space p {
+    color: #eee;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0 5px;
+    text-align: center;
+    background-color: transparent; /* quitar fondo blanco */
 }
 
 /* Cartas seleccionadas */
 .selected-card {
     background-color: #444;
     border: 2px solid #e53935;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
     text-align: center;
+    box-shadow: 0 0 10px rgba(229, 57, 53, 0.7);
+}
+
+/* Nombres y atributos */
+.card-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 2px #000; /* sombra para mejorar legibilidad */
+}
+
+.card-attributes {
+    font-size: 1rem;
+    color: #f0f0f0;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px #000; /* sombra para mejorar legibilidad */
 }
 
 /* Botones */

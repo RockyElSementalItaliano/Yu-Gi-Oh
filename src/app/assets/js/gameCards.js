@@ -1,18 +1,48 @@
 import { getTrainers } from './warriorService.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+async function fetchAttributes() {
+    const [powersRes, spellsRes, typesRes] = await Promise.all([
+        fetch('http://localhost:3000/game/powers'),
+        fetch('http://localhost:3000/game/spells'),
+        fetch('http://localhost:3000/game/typewarriors')
+    ]);
+    const [powers, spells, types] = await Promise.all([
+        powersRes.json(),
+        spellsRes.json(),
+        typesRes.json()
+    ]);
+    return { powers, spells, types };
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
     const player1CardsContainer = document.getElementById('player1-cards');
     const player2CardsContainer = document.getElementById('player2-cards');
     const gameAreaBtn = document.getElementById('game-area');
     const finalizeBtn = document.getElementById('finalize-button');
 
-    function createWarriorCard(warrior) {
+    const { powers, spells, types } = await fetchAttributes();
+
+    function getAttributeNameById(attributes, id) {
+        const attr = attributes.find(a => a.id === id);
+        return attr ? attr.name : '';
+    }
+
+    function createWarriorCard(warrior, powerName, spellName, typeName) {
+        const powerIcon = '⚡'; // icono genérico para power
+        const spellIcon = '✨'; // icono genérico para spell
+        const typeIcon = '🛡️'; // icono genérico para type warrior
+
         const card = document.createElement('div');
         card.classList.add('card-button');
         card.dataset.id = warrior.id;
         card.innerHTML = `
             <img src="../img/${warrior.image_url}" alt="${warrior.name}" class="card-image" />
             <h3 class="card-name">${warrior.name}</h3>
+            <p class="card-attributes">
+                ${powerIcon} ${powerName} &nbsp;&nbsp;
+                ${spellIcon} ${spellName} &nbsp;&nbsp;
+                ${typeIcon} ${typeName}
+            </p>
             <p class="card-description">${warrior.description}</p>
         `;
         return card;
@@ -36,41 +66,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Renderizar cartas Jugador 1
         selectedCards[1].forEach((warrior, index) => {
-            console.log('Jugador 1 - index:', index);
-            const card = createWarriorCard(warrior);
+            const powerName = getAttributeNameById(powers, warrior.power_id);
+            const spellName = getAttributeNameById(spells, warrior.spell_id);
+            const typeName = getAttributeNameById(types, warrior.type_warrior_id);
+
+            const card = createWarriorCard(warrior, powerName, spellName, typeName);
             const containerDiv = document.createElement('div');
             containerDiv.classList.add('card-container');
             containerDiv.appendChild(card);
             const spaces = player1CardsContainer.querySelectorAll('.card-space');
-            console.log('Jugador 1 - espacios:', spaces.length);
             const space = spaces[index];
             if (space) {
                 space.appendChild(containerDiv);
-                console.log('Carta añadida a espacio:', space);
-            } else {
-                console.warn('No se encontró espacio para la carta en índice:', index);
             }
         });
 
         // Renderizar cartas Jugador 2
         selectedCards[2].forEach((warrior, index) => {
-            console.log('Jugador 2 - index:', index);
-            const card = createWarriorCard(warrior);
+            const powerName = getAttributeNameById(powers, warrior.power_id);
+            const spellName = getAttributeNameById(spells, warrior.spell_id);
+            const typeName = getAttributeNameById(types, warrior.type_warrior_id);
+
+            const card = createWarriorCard(warrior, powerName, spellName, typeName);
             const containerDiv = document.createElement('div');
             containerDiv.classList.add('card-container');
             containerDiv.appendChild(card);
             const spaces = player2CardsContainer.querySelectorAll('.card-space');
-            console.log('Jugador 2 - espacios:', spaces.length);
             const space = spaces[index];
             if (space) {
                 space.appendChild(containerDiv);
-                console.log('Carta añadida a espacio:', space);
-            } else {
-                console.warn('No se encontró espacio para la carta en índice:', index);
             }
         });
 
-        // Habilitar botón iniciar batalla si hay cartas
         gameAreaBtn.disabled = false;
         finalizeBtn.disabled = false;
     }
@@ -86,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const player1Warriors = selectedCards[1].map(w => w.id);
         const player2Warriors = selectedCards[2].map(w => w.id);
 
-        // Obtener entrenadores seleccionados
         const selectedTrainersJSON = localStorage.getItem('selectedTrainers');
         let player1TrainerName = 'Jugador 1';
         let player2TrainerName = 'Jugador 2';
@@ -134,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     gameAreaBtn.addEventListener('click', () => {
-        gameAreaBtn.disabled = true; // Deshabilitar el botón tras el primer clic
+        gameAreaBtn.disabled = true;
         calculateWinner();
     });
 
