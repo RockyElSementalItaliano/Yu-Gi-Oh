@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Juego de Guerreros</title>
     <link rel="stylesheet" href="/assets/css/register.css">
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -15,6 +17,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h1 class="text-center mb-4">Registro</h1>
+                        <div id="alert-container"></div>
                         <form id="register-form" aria-label="Formulario de registro">
                             <div class="form-group">
                                 <label for="username">Usuario:</label>
@@ -29,13 +32,15 @@
                                 <input type="password" id="confirm_password" class="form-control" placeholder="Confirmar Contraseña" required>
                             </div>
                             <button type="button" id="register-btn" class="btn btn-primary btn-block">Registrarse</button>
-<a href="/assets/views/login.html" class="btn btn-secondary btn-block mt-2">Cancelar</a>
+                            <a href="/assets/views/login.html" class="btn btn-secondary btn-block mt-2">Cancelar</a>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Bootstrap JS Bundle CDN (Popper + Bootstrap JS) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/main.js"></script> <!-- Conexión al archivo JavaScript -->
 </body>
 
