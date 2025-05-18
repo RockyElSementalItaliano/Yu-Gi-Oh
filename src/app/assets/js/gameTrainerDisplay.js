@@ -17,8 +17,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             nameElement.textContent = trainer.name;
         }
         if (imageElement) {
-            const imageFileName = encodeURIComponent(trainer.name) + '.jpg';
-            imageElement.style.backgroundImage = `url(/img/${imageFileName})`;
+            // Usar la ruta de imagen almacenada en el objeto trainer
+            if (trainer.image) {
+                imageElement.style.backgroundImage = `url(${trainer.image})`;
+            } else {
+                // Fallback a nombre basado en el nombre del entrenador
+                const imageFileName = encodeURIComponent(trainer.name) + '.jpg';
+                imageElement.style.backgroundImage = `url(/img/${imageFileName})`;
+            }
         }
     }
 

@@ -10,7 +10,7 @@ const upload = multer(multerConfig);
 router.get('/', showCards);
 router.get('/:id', showCardId);
 router.post('/', upload.array('image_url'), addCard);
-router.put('/:id', updateCard);
+router.put('/:id', upload.array('image_url'), updateCard);
 router.delete('/:id', deleteCard);
 
 export default router;

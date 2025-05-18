@@ -21,4 +21,20 @@ export const createTrainer = async (name, image_url) => {
   return result;
 };
 
-export default { getAllTrainers, getTrainerById, createTrainer };
+export const updateTrainer = async (id, name, image_url) => {
+  const [result] = await connect.query(
+    'UPDATE trainer SET name = ?, image = ? WHERE id = ?',
+    [name, image_url, id]
+  );
+  return result;
+};
+
+export const deleteTrainer = async (id) => {
+  const [result] = await connect.query(
+    'DELETE FROM trainer WHERE id = ?',
+    [id]
+  );
+  return result;
+};
+
+export default { getAllTrainers, getTrainerById, createTrainer, updateTrainer, deleteTrainer };

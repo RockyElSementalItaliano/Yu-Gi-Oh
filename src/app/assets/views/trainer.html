@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gestión de Entrenadores</title>
+    <link rel="stylesheet" href="../css/users.css" />
+</head>
+<body>
+    <h1>Gestión de Entrenadores</h1>
+    <button id="back-btn" onclick="window.location.href='adminPanel.html'">Volver al Panel Administrativo</button>
+
+    <div id="create-form" style="display:flex; align-items:center; gap:10px; margin-bottom:20px; position:relative;">
+        <button id="toggle-create-form" style="font-size:24px; width:40px; height:40px; border:2px solid #000; border-radius:5px; background:none; cursor:pointer;" title="Crear Entrenador">
+            &#43; <!-- símbolo de más -->
+        </button>
+        <div id="create-form-fields" style="display:none; margin-left:10px;">
+            <label for="create-trainer-name">Nombre:</label>
+            <input type="text" id="create-trainer-name" />
+            <label for="create-trainer-photo">Fotografía:</label>
+            <input type="file" id="create-trainer-photo" accept="image/*" />
+            <button id="create-btn">Crear Entrenador</button>
+        </div>
+    </div>
+
+    <table id="trainers-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Entrenadores cargados dinámicamente -->
+        </tbody>
+    </table>
+
+    <div id="edit-form" style="display:none;">
+        <h2>Editar Entrenador</h2>
+        <input type="hidden" id="edit-trainer-id" />
+        <label for="edit-trainer-name">Nombre:</label>
+        <input type="text" id="edit-trainer-name" />
+        <button id="save-btn">Guardar Cambios</button>
+        <button id="cancel-btn">Cancelar</button>
+    </div>
+
+    <script src="../js/trainer.js"></script>
+</body>
+</html>

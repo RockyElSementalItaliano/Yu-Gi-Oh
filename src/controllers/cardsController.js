@@ -1,24 +1,41 @@
 import { connect } from '../config/db/connect.js';
 
-// Mostrar todas las tarjetas
+// Mostrar todas las tarjetas con nombres legibles
 export const showCards = async (req, res) => {
   try {
-    const sqlQuery = "SELECT * FROM warriors"; // Selecciona todas las tarjetas
+    const sqlQuery = `
+      SELECT w.*, r.name AS race_name, p.type AS power_type, p.value AS power_value, s.type AS spell_type, s.value AS spell_value, t.name AS type_warrior_name
+      FROM warriors w
+      LEFT JOIN races r ON w.race_id = r.id
+      LEFT JOIN power p ON w.power_id = p.id
+      LEFT JOIN spells s ON w.spell_id = s.id
+      LEFT JOIN type_warriors t ON w.type_warrior_id = t.id
+    `;
     const [result] = await connect.query(sqlQuery);
-    res.status(200).json(result); // Devuelve las tarjetas
+    res.status(200).json(result);
   } catch (error) {
+    console.error('Error fetching cards:', error);
     res.status(500).json({ error: "Error fetching cards", details: error.message });
   }
 };
 
-// Mostrar una tarjeta por ID
+// Mostrar una tarjeta por ID con nombres legibles
 export const showCardId = async (req, res) => {
   try {
-    const sqlQuery = 'SELECT * FROM warriors WHERE id = ?'; // Selecciona una tarjeta específica
+    const sqlQuery = `
+      SELECT w.*, r.name AS race_name, p.type AS power_type, p.value AS power_value, s.type AS spell_type, s.value AS spell_value, t.name AS type_warrior_name
+      FROM warriors w
+      LEFT JOIN races r ON w.race_id = r.id
+      LEFT JOIN power p ON w.power_id = p.id
+      LEFT JOIN spells s ON w.spell_id = s.id
+      LEFT JOIN type_warriors t ON w.type_warrior_id = t.id
+      WHERE w.id = ?
+    `;
     const [result] = await connect.query(sqlQuery, [req.params.id]);
     if (result.length === 0) return res.status(404).json({ error: "Card not found" });
-    res.status(200).json(result[0]); // Devuelve la tarjeta encontrada
+    res.status(200).json(result[0]);
   } catch (error) {
+    console.error('Error fetching card:', error);
     res.status(500).json({ error: "Error fetching card", details: error.message });
   }
 };
@@ -35,15 +52,13 @@ export const addCard = async (req, res) => {
       return res.status(400).json({ error: "Image file is required" });
     }
 
-    // Buscar el archivo con campo 'image_url'
     const imageFile = req.files.find(file => file.fieldname === 'image_url');
     if (!imageFile) {
       return res.status(400).json({ error: "Image file with fieldname 'image_url' is required" });
     }
 
-    console.log('Ruta imagen subida:', imageFile.path);
     const path = await import('path');
-    const image_url = path.basename(imageFile.path); // Guardar solo el nombre del archivo
+    const image_url = path.basename(imageFile.path);
 
     const sqlQuery = "INSERT INTO warriors (name, race_id, power_id, spell_id, image_url, description, type_warrior_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     const [result] = await connect.query(sqlQuery, [name, race_id, power_id, spell_id, image_url, description, type_warrior_id]);
@@ -58,24 +73,29 @@ export const addCard = async (req, res) => {
   }
 };
 
-// Actualizar una tarjeta por ID
+// Actualizar una tarjeta por ID sin modificar la imagen
 export const updateCard = async (req, res) => {
   try {
-    const { warrior_id, description, image_url } = req.body; // Datos necesarios para actualizar
-    if (!warrior_id || !description || !image_url) {
+    // Usar directamente req.body, ignorando cualquier archivo de imagen
+    const { name, race_id, power_id, spell_id, description, type_warrior_id } = req.body;
+
+    if (!name || !race_id || !power_id || !spell_id || !description || !type_warrior_id) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const sqlQuery = "UPDATE warriors SET warrior_id=?, description=?, image_url=? WHERE id=?";
-    const [result] = await connect.query(sqlQuery, [warrior_id, description, image_url, req.params.id]);
+    const sqlQuery = "UPDATE warriors SET name=?, race_id=?, power_id=?, spell_id=?, description=?, type_warrior_id=? WHERE id=?";
+    const params = [name, race_id, power_id, spell_id, description, type_warrior_id, req.params.id];
+
+    const [result] = await connect.query(sqlQuery, params);
 
     if (result.affectedRows === 0) return res.status(404).json({ error: "Card not found" });
 
     res.status(200).json({
       message: "Card updated successfully",
-      data: { warrior_id, description, image_url }
+      data: { id: req.params.id, name, race_id, power_id, spell_id, description, type_warrior_id }
     });
   } catch (error) {
+    console.error('Error en updateCard:', error);
     res.status(500).json({ error: "Error updating card", details: error.message });
   }
 };
@@ -93,6 +113,7 @@ export const deleteCard = async (req, res) => {
       deleted: result.affectedRows
     });
   } catch (error) {
+    console.error('Error en deleteCard:', error);
     res.status(500).json({ error: "Error deleting card", details: error.message });
   }
 };

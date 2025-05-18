@@ -1,4 +1,4 @@
-import { connect } from '../../config/db/connect.js'; // Importación del conector de la base de datos
+import { connect } from '../config/db/connect.js'; // Importación del conector de la base de datos
 
 export const getRanking = async () => {
   const [rows] = await connect.query(`
@@ -19,5 +19,14 @@ export const getRanking = async () => {
   return rows;
 };
 
+// Nueva función para eliminar registros de ranking por trainer_id
+export const deleteRankingByTrainerId = async (trainerId) => {
+  const [result] = await connect.query(
+    'DELETE FROM ranking WHERE trainer_id = ?',
+    [trainerId]
+  );
+  return result;
+};
+
 // Exportación por defecto (opcional)
-export default { getRanking };
+export default { getRanking, deleteRankingByTrainerId };
