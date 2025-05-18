@@ -2,14 +2,12 @@ const apiUrl = '/game/users'; // Ajustar según ruta backend
 
 // Elementos DOM
 const usersTableBody = document.querySelector('#users-table tbody');
-const editForm = document.getElementById('edit-form');
-const editUserId = document.getElementById('edit-user-id');
-const editUsername = document.getElementById('edit-username');
-const editRole = document.getElementById('edit-role');
-const saveBtn = document.getElementById('save-btn');
-const cancelBtn = document.getElementById('cancel-btn');
+const createUserForm = document.getElementById('create-user-form');
+const editUserForm = document.getElementById('edit-user-form');
+const createFormMessage = document.getElementById('create-form-message');
+const editFormMessage = document.getElementById('edit-form-message');
 
-// Función para cargar usuarios
+// Cargar usuarios y renderizar tabla
 async function loadUsers() {
   try {
     const token = localStorage.getItem('token');
@@ -24,7 +22,7 @@ async function loadUsers() {
   }
 }
 
-// Función para renderizar usuarios en la tabla
+// Renderizar usuarios en tabla
 function renderUsers(users) {
   usersTableBody.innerHTML = '';
   users.forEach(user => {
@@ -34,8 +32,8 @@ function renderUsers(users) {
       <td>${user.username}</td>
       <td>${user.role}</td>
       <td>
-        <button class="edit-btn" data-id="${user.id}">Editar</button>
-        <button class="delete-btn" data-id="${user.id}">Eliminar</button>
+        <button class="edit-btn btn btn-sm btn-warning" data-id="${user.id}">Editar</button>
+        <button class="delete-btn btn btn-sm btn-danger" data-id="${user.id}">Eliminar</button>
       </td>
     `;
     usersTableBody.appendChild(tr);
@@ -43,12 +41,12 @@ function renderUsers(users) {
   addEventListeners();
 }
 
-// Agregar eventos a botones editar y eliminar
+// Agregar eventos a botones
 function addEventListeners() {
   document.querySelectorAll('.edit-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const userId = btn.getAttribute('data-id');
-      openEditForm(userId);
+      openEditModal(userId);
     });
   });
   document.querySelectorAll('.delete-btn').forEach(btn => {
@@ -61,8 +59,8 @@ function addEventListeners() {
   });
 }
 
-// Abrir formulario de edición con datos del usuario
-async function openEditForm(userId) {
+// Abrir modal de edición y cargar datos
+async function openEditModal(userId) {
   try {
     const token = localStorage.getItem('token');
     const response = await fetch(`${apiUrl}/${userId}`, {
@@ -70,19 +68,26 @@ async function openEditForm(userId) {
     });
     if (!response.ok) throw new Error('Error al obtener usuario');
     const user = await response.json();
-    editUserId.value = user.id;
-    editUsername.value = user.username;
-    editRole.value = user.role;
-    editForm.style.display = 'block';
+
+    document.getElementById('edit-user-id').value = user.id;
+    document.getElementById('edit-username').value = user.username;
+    document.getElementById('edit-role').value = user.role;
+
+    const modalElement = document.getElementById('editUserModal');
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
   } catch (error) {
     alert(error.message);
   }
 }
 
-// Guardar cambios de usuario
-async function saveChanges() {
-  const id = editUserId.value;
-  const role = editRole.value;
+// Guardar cambios de usuario editado
+async function saveUserChanges(e) {
+  e.preventDefault();
+  editFormMessage.textContent = '';
+
+  const id = document.getElementById('edit-user-id').value;
+  const role = document.getElementById('edit-role').value;
 
   try {
     const token = localStorage.getItem('token');
@@ -95,11 +100,48 @@ async function saveChanges() {
       body: JSON.stringify({ role })
     });
     if (!response.ok) throw new Error('Error al actualizar usuario');
-    alert('Usuario actualizado correctamente');
-    editForm.style.display = 'none';
+    editFormMessage.style.color = 'green';
+    editFormMessage.textContent = 'Usuario actualizado correctamente';
+    const modalElement = document.getElementById('editUserModal');
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    if (modal) modal.hide();
     loadUsers();
   } catch (error) {
-    alert(error.message);
+    editFormMessage.style.color = 'red';
+    editFormMessage.textContent = error.message;
+  }
+}
+
+// Crear nuevo usuario
+async function createUser(e) {
+  e.preventDefault();
+  createFormMessage.textContent = '';
+
+  const username = document.getElementById('create-username').value;
+  const password = document.getElementById('create-password').value;
+  const role = document.getElementById('create-role').value;
+
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ username, password, role })
+    });
+    if (!response.ok) throw new Error('Error al crear usuario');
+    createFormMessage.style.color = 'green';
+    createFormMessage.textContent = 'Usuario creado correctamente';
+    const modalElement = document.getElementById('createUserModal');
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    if (modal) modal.hide();
+    document.getElementById('create-user-form').reset();
+    loadUsers();
+  } catch (error) {
+    createFormMessage.style.color = 'red';
+    createFormMessage.textContent = error.message;
   }
 }
 
@@ -119,13 +161,13 @@ async function deleteUser(userId) {
   }
 }
 
-// Cancelar edición
-cancelBtn.addEventListener('click', () => {
-  editForm.style.display = 'none';
-});
-
 // Inicializar
 document.addEventListener('DOMContentLoaded', () => {
   loadUsers();
-  saveBtn.addEventListener('click', saveChanges);
+  if (editUserForm) {
+    editUserForm.addEventListener('submit', saveUserChanges);
+  }
+  if (createUserForm) {
+    createUserForm.addEventListener('submit', createUser);
+  }
 });

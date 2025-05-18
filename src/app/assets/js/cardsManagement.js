@@ -1,80 +1,93 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Cargar opciones para formulario de creación
     loadOptions('/game/races', 'race_id');
     loadOptions('/game/powers', 'power_id');
     loadOptions('/game/spells', 'spell_id');
     loadOptions('/game/typewarriors', 'type_warrior_id');
 
+    // Cargar opciones para formulario de edición
+    loadOptions('/game/races', 'edit-race_id');
+    loadOptions('/game/powers', 'edit-power_id');
+    loadOptions('/game/spells', 'edit-spell_id');
+    loadOptions('/game/typewarriors', 'edit-type_warrior_id');
+
     loadCards();
 
-    const showCreateFormBtn = document.getElementById('show-create-form');
-    const createFormContainer = document.getElementById('create-card-form-container');
-    const cancelCreateBtn = document.getElementById('cancel-create');
     const createCardForm = document.getElementById('create-card-form');
+    const editCardForm = document.getElementById('edit-card-form');
     const formMessage = document.getElementById('form-message');
-    const submitBtn = document.getElementById('submit-btn');
-    const imageUploadContainer = document.getElementById('image-upload-container');
+    const editFormMessage = document.getElementById('edit-form-message');
 
-    showCreateFormBtn.addEventListener('click', () => {
-        createFormContainer.style.display = 'block';
-        showCreateFormBtn.style.display = 'none';
-        formMessage.textContent = '';
-        createCardForm.reset();
-        document.getElementById('card-id').value = '';
-        submitBtn.textContent = 'Crear Carta';
-        imageUploadContainer.style.display = 'block'; // Mostrar selector de archivo en creación
-    });
+    if (createCardForm) {
+        createCardForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            formMessage.textContent = '';
 
-    cancelCreateBtn.addEventListener('click', () => {
-        createFormContainer.style.display = 'none';
-        showCreateFormBtn.style.display = 'block';
-        formMessage.textContent = '';
-        createCardForm.reset();
-        document.getElementById('card-id').value = '';
-    });
+            const formData = new FormData(createCardForm);
 
-    createCardForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        formMessage.textContent = '';
-
-        const cardId = document.getElementById('card-id').value;
-        const formData = new FormData(createCardForm);
-
-        try {
-            let response;
-            if (cardId) {
-                // Edición
-                response = await fetch(`/game/cards/${cardId}`, {
-                    method: 'PUT',
-                    body: formData
-                });
-            } else {
-                // Creación
-                response = await fetch('/game/cards', {
+            try {
+                const response = await fetch('/game/cards', {
                     method: 'POST',
                     body: formData
                 });
-            }
 
-            const result = await response.json();
+                const result = await response.json();
 
-            if (response.ok) {
-                formMessage.style.color = 'green';
-                formMessage.textContent = cardId ? 'Carta actualizada exitosamente.' : 'Carta creada exitosamente.';
-                createCardForm.reset();
-                document.getElementById('card-id').value = '';
-                loadCards();
-                createFormContainer.style.display = 'none';
-                showCreateFormBtn.style.display = 'block';
-            } else {
+                if (response.ok) {
+                    formMessage.style.color = 'green';
+                    formMessage.textContent = 'Carta creada exitosamente.';
+                    createCardForm.reset();
+                    loadCards();
+                    const modalElement = document.getElementById('createCardModal');
+                    const modal = bootstrap.Modal.getInstance(modalElement);
+                    if (modal) modal.hide();
+                } else {
+                    formMessage.style.color = 'red';
+                    formMessage.textContent = 'Error: ' + (result.message || 'No se pudo crear la carta.');
+                }
+            } catch (error) {
                 formMessage.style.color = 'red';
-                formMessage.textContent = 'Error: ' + (result.message || 'No se pudo guardar la carta.');
+                formMessage.textContent = 'Error al conectar con el servidor.';
+                console.error('Error al crear carta:', error);
             }
-        } catch (error) {
-            formMessage.style.color = 'red';
-            formMessage.textContent = 'Error al conectar con el servidor.';
-            console.error('Error al guardar carta:', error);
-        }
-    });
+        });
+    }
+
+    if (editCardForm) {
+        editCardForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            editFormMessage.textContent = '';
+
+            const cardId = document.getElementById('edit-card-id').value;
+            const formData = new FormData(editCardForm);
+
+            try {
+                const response = await fetch(`/game/cards/${cardId}`, {
+                    method: 'PUT',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    editFormMessage.style.color = 'green';
+                    editFormMessage.textContent = 'Carta actualizada exitosamente.';
+                    editCardForm.reset();
+                    loadCards();
+                    const modalElement = document.getElementById('editCardModal');
+                    const modal = bootstrap.Modal.getInstance(modalElement);
+                    if (modal) modal.hide();
+                } else {
+                    editFormMessage.style.color = 'red';
+                    editFormMessage.textContent = 'Error: ' + (result.message || 'No se pudo actualizar la carta.');
+                }
+            } catch (error) {
+                editFormMessage.style.color = 'red';
+                editFormMessage.textContent = 'Error al conectar con el servidor.';
+                console.error('Error al actualizar carta:', error);
+            }
+        });
+    }
 
     async function loadOptions(endpoint, selectId) {
         try {
@@ -122,8 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${card.type_warrior_name || ''}</td>
                 <td>${card.description}</td>
                 <td>
-                    <button class="edit-btn" data-id="${card.id}">Editar</button>
-                    <button class="delete-btn" data-id="${card.id}">Eliminar</button>
+                    <button class="edit-btn btn btn-sm btn-warning" data-id="${card.id}">Editar</button>
+                    <button class="delete-btn btn btn-sm btn-danger" data-id="${card.id}">Eliminar</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -154,28 +167,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Error al obtener carta');
             const card = await response.json();
 
-            document.getElementById('card-id').value = card.id;
-            document.getElementById('name').value = card.name;
-            document.getElementById('race_id').value = card.race_id;
-            document.getElementById('power_id').value = card.power_id;
-            document.getElementById('spell_id').value = card.spell_id;
-            document.getElementById('type_warrior_id').value = card.type_warrior_id;
-            document.getElementById('description').value = card.description;
+            document.getElementById('edit-card-id').value = card.id;
+            document.getElementById('edit-name').value = card.name;
+            document.getElementById('edit-race_id').value = card.race_id;
+            document.getElementById('edit-power_id').value = card.power_id;
+            document.getElementById('edit-spell_id').value = card.spell_id;
+            document.getElementById('edit-type_warrior_id').value = card.type_warrior_id;
+            document.getElementById('edit-description').value = card.description;
 
-            // Mostrar formulario y cambiar texto del botón
-            const createFormContainer = document.getElementById('create-card-form-container');
-            const showCreateFormBtn = document.getElementById('show-create-form');
-            const submitBtn = document.getElementById('submit-btn');
-
-            createFormContainer.style.display = 'block';
-            showCreateFormBtn.style.display = 'none';
-            submitBtn.textContent = 'Guardar Cambios';
-
-            // Ocultar selector de archivo en edición
-            const imageUploadContainer = document.getElementById('image-upload-container');
-            if (imageUploadContainer) {
-                imageUploadContainer.style.display = 'none';
-            }
+            // Abrir modal de edición
+            const modalElement = document.getElementById('editCardModal');
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
         } catch (error) {
             alert(error.message);
         }

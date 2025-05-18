@@ -5,52 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gestión de Cartas</title>
     <link rel="stylesheet" href="../css/cards.css" />
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
     <h1>Gestión de Cartas</h1>
-    <button id="back-btn" onclick="window.location.href='adminPanel.html'">Volver al Panel Administrativo</button>
+    <button id="back-btn" onclick="window.location.href='adminPanel.html'" class="btn btn-secondary mb-3">Volver al Panel Administrativo</button>
 
-    <button id="show-create-form" style="margin: 20px 0;">Crear Nueva Carta</button>
+    <!-- Botón para abrir modal de creación -->
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createCardModal">
+      Crear Nueva Carta
+    </button>
 
-    <div id="create-card-form-container" style="display:none; margin-bottom: 20px;">
-        <form id="create-card-form" enctype="multipart/form-data">
-            <input type="hidden" id="card-id" name="card_id" />
-            <label for="name">Nombre de la Carta:</label>
-            <input type="text" id="name" name="name" required />
-
-            <label for="race_id">Raza:</label>
-            <select id="race_id" name="race_id" required>
-                <option value="">Seleccione una raza</option>
-            </select>
-
-            <label for="power_id">Poder:</label>
-            <select id="power_id" name="power_id" required>
-                <option value="">Seleccione un poder</option>
-            </select>
-
-            <label for="spell_id">Hechizo:</label>
-            <select id="spell_id" name="spell_id" required>
-                <option value="">Seleccione un hechizo</option>
-            </select>
-
-            <label for="type_warrior_id">Tipo de Guerrero:</label>
-            <select id="type_warrior_id" name="type_warrior_id" required>
-                <option value="">Seleccione un tipo</option>
-            </select>
-
-            <label for="image_url">Imagen de la Carta:</label>
-            <input type="file" id="image_url" name="image_url" accept="image/*" />
-
-            <label for="description">Descripción:</label>
-            <textarea id="description" name="description" rows="4" required></textarea>
-
-            <button type="submit" id="submit-btn">Crear Carta</button>
-            <button type="button" id="cancel-create">Cancelar</button>
-        </form>
-        <div id="form-message"></div>
+    <!-- Modal de creación -->
+    <div class="modal fade" id="createCardModal" tabindex="-1" aria-labelledby="createCardModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createCardModalLabel">Crear Nueva Carta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <form id="create-card-form" enctype="multipart/form-data">
+                <input type="hidden" id="card-id" name="card_id" />
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre de la Carta:</label>
+                    <input type="text" class="form-control" id="name" name="name" required />
+                </div>
+                <div class="mb-3">
+                    <label for="race_id" class="form-label">Raza:</label>
+                    <select class="form-select" id="race_id" name="race_id" required>
+                        <option value="">Seleccione una raza</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="power_id" class="form-label">Poder:</label>
+                    <select class="form-select" id="power_id" name="power_id" required>
+                        <option value="">Seleccione un poder</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="spell_id" class="form-label">Hechizo:</label>
+                    <select class="form-select" id="spell_id" name="spell_id" required>
+                        <option value="">Seleccione un hechizo</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="type_warrior_id" class="form-label">Tipo de Guerrero:</label>
+                    <select class="form-select" id="type_warrior_id" name="type_warrior_id" required>
+                        <option value="">Seleccione un tipo</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="image_url" class="form-label">Imagen de la Carta:</label>
+                    <input type="file" class="form-control" id="image_url" name="image_url" accept="image/*" />
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción:</label>
+                    <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submit-btn">Crear Carta</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel-create">Cancelar</button>
+            </form>
+            <div id="form-message"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <table id="cards-table" border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+    <!-- Modal de edición -->
+    <div class="modal fade" id="editCardModal" tabindex="-1" aria-labelledby="editCardModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editCardModalLabel">Editar Carta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <form id="edit-card-form" enctype="multipart/form-data">
+                <input type="hidden" id="edit-card-id" name="card_id" />
+                <div class="mb-3">
+                    <label for="edit-name" class="form-label">Nombre de la Carta:</label>
+                    <input type="text" class="form-control" id="edit-name" name="name" required />
+                </div>
+                <div class="mb-3">
+                    <label for="edit-race_id" class="form-label">Raza:</label>
+                    <select class="form-select" id="edit-race_id" name="race_id" required>
+                        <option value="">Seleccione una raza</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-power_id" class="form-label">Poder:</label>
+                    <select class="form-select" id="edit-power_id" name="power_id" required>
+                        <option value="">Seleccione un poder</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-spell_id" class="form-label">Hechizo:</label>
+                    <select class="form-select" id="edit-spell_id" name="spell_id" required>
+                        <option value="">Seleccione un hechizo</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-type_warrior_id" class="form-label">Tipo de Guerrero:</label>
+                    <select class="form-select" id="edit-type_warrior_id" name="type_warrior_id" required>
+                        <option value="">Seleccione un tipo</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-image_url" class="form-label">Imagen de la Carta:</label>
+                    <input type="file" class="form-control" id="edit-image_url" name="image_url" accept="image/*" />
+                </div>
+                <div class="mb-3">
+                    <label for="edit-description" class="form-label">Descripción:</label>
+                    <textarea class="form-control" id="edit-description" name="description" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="save-btn">Guardar Cambios</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel-edit">Cancelar</button>
+            </form>
+            <div id="edit-form-message"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table id="cards-table" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>ID</th>
@@ -69,6 +148,8 @@
         </tbody>
     </table>
 
+    <!-- Bootstrap JS Bundle CDN (Popper + Bootstrap JS) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/cardsManagement.js" defer></script>
 </body>
 </html>
