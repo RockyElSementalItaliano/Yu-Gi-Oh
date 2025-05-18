@@ -46,21 +46,35 @@ export const addUsers = async (req, res) => {
 // Actualizar un usuario por ID
 export const updateUsers = async (req, res) => {
   try {
-    const { username, email } = req.body; // Datos necesarios para actualizar el usuario
-    if (!username || !email) {
-      return res.status(400).json({ error: "Missing required fields" });
+    const { role } = req.body; // Solo actualizar rol
+    console.log('updateUsers called with role:', role, 'and id:', req.params.id);
+
+    if (!role) {
+      console.log('Missing role in request body');
+      return res.status(400).json({ error: "Missing required field: role" });
     }
 
-    const sqlQuery = "UPDATE users SET username=?, email=?, updated_at=NOW() WHERE id=?";
-    const [result] = await connect.query(sqlQuery, [username, email, req.params.id]);
+    if (role !== 'player' && role !== 'admin') {
+      console.log('Invalid role value:', role);
+      return res.status(400).json({ error: "Invalid role value" });
+    }
 
-    if (result.affectedRows === 0) return res.status(404).json({ error: "User not found" });
+    const sqlQuery = "UPDATE users SET role=? WHERE id=?";
+    const [result] = await connect.query(sqlQuery, [role, req.params.id]);
+
+    console.log('SQL update result:', result);
+
+    if (result.affectedRows === 0) {
+      console.log('User not found with id:', req.params.id);
+      return res.status(404).json({ error: "User not found" });
+    }
 
     res.status(200).json({
       message: "User updated successfully",
-      data: { username, email }
+      data: { role }
     });
   } catch (error) {
+    console.error('Error updating user:', error);
     res.status(500).json({ error: "Error updating user", details: error.message });
   }
 };

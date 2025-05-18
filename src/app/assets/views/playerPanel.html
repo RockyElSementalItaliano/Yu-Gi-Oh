@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Panel de Jugador</title>
-    <link rel="stylesheet" href="../css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Juego</title>
+    <link rel="stylesheet" href="../css/home.css">
 </head>
+
 <body>
-    <h1>Panel de Jugador</h1>
-    <p>Bienvenido, jugador.</p>
-    <nav>
-        <ul>
-            <li><a href="game.html">Jugar</a></li>
-            <li><a href="ranking.html">Ranking</a></li>
-            <li><a href="logout.html">Cerrar sesión</a></li>
-        </ul>
-    </nav>
+    <h1> El Eclipse</h1>
+    <div class="container text-center mt-5">
+        <button class="btn btn-success mt-4" onclick="location.href='select-warriors.html'">Jugar</button>
+        <button class="btn btn-info mt-4" onclick="location.href='ranking.html'">Ranking</button>
+    </div>
+    <div class="card">
+        <a href="login.html">Cerrar sesión</a>
+    </div>
 </body>
+
 </html>

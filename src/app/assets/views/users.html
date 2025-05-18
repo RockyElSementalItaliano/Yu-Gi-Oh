@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="../css/users.css" />
+</head>
+<body>
+    <h1>Gestión de Usuarios</h1>
+    <button id="back-btn" onclick="window.location.href='adminPanel.html'">Volver al Panel Administrativo</button>
+    <table id="users-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Usuarios cargados dinámicamente -->
+        </tbody>
+    </table>
+
+    <div id="edit-form">
+        <h2>Editar Usuario</h2>
+        <input type="hidden" id="edit-user-id" />
+        <label for="edit-username">Usuario:</label>
+        <input type="text" id="edit-username" disabled />
+        <label for="edit-role">Rol:</label>
+        <select id="edit-role">
+            <option value="player">Player</option>
+            <option value="admin">Admin</option>
+        </select>
+        <button id="save-btn">Guardar Cambios</button>
+        <button id="cancel-btn">Cancelar</button>
+    </div>
+
+    <script src="../js/users.js"></script>
+</body>
+</html>
