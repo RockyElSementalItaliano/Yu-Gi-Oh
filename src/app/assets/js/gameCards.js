@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 ${spellIcon} ${spellName} &nbsp;&nbsp;
                 ${typeIcon} ${typeName}
             </p>
-            <p class="card-description">${warrior.description}</p>
         `;
         return card;
     }
