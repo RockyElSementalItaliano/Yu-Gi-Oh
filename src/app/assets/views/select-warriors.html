@@ -28,41 +28,41 @@
             </div>
         </div>
 
-        <div id="selected-warriors">
-            <h2>Guerreros Seleccionados</h2>
-            <div class="d-flex justify-content-center gap-4 mb-4 flex-wrap">
-                <div id="player1-cards" class="player-cards d-flex gap-2">
-                    <h3 class="w-100">Jugador 1</h3>
-                    <div class="trainer-select-container d-flex align-items-center mb-3 w-100">
-                        <select id="player1-trainers" class="form-select me-3"></select>
-                        <div id="player1-trainer-image" class="trainer-image-circle"></div>
+            <div id="selected-warriors">
+                <h2>Guerreros Seleccionados</h2>
+                <div class="d-flex justify-content-center gap-4 mb-4 flex-wrap">
+                    <div id="player1-cards" class="player-cards d-flex gap-2">
+                        <h3 class="w-100">Jugador 1</h3>
+                        <div class="trainer-select-container d-flex align-items-center mb-3 w-100">
+                            <select id="player1-trainers" class="form-select me-3"></select>
+                            <div id="player1-trainer-image" class="trainer-image-circle"></div>
+                        </div>
+                        <div class="card-space me-2 selected-card"></div>
+                        <div class="card-space me-2 selected-card"></div>
+                        <div class="card-space me-2 selected-card"></div>
+                        <div class="card-space me-2 selected-card"></div>
+                        <div class="card-space me-2 selected-card"></div>
+                        </div>
+                    <div id="player2-cards" class="player-cards d-flex gap-2">
+                        <h3 class="w-100">Jugador 2</h3>
+                        <div class="trainer-select-container d-flex align-items-center mb-3 w-100">
+                            <select id="player2-trainers" class="form-select me-3"></select>
+                            <div id="player2-trainer-image" class="trainer-image-circle"></div>
+                        </div>
+                        <div class="card-space me-2 selected-card"></div>
+                        <div class="card-space me-2 selected-card"></div>
+                        <div class="card-space me-2 selected-card"></div>
+                        <div class="card-space me-2 selected-card"></div>
+                        <div class="card-space me-2 selected-card"></div>
                     </div>
-                    <div class="card-space me-2"></div>
-                    <div class="card-space me-2"></div>
-                    <div class="card-space me-2"></div>
-                    <div class="card-space me-2"></div>
-                    <div class="card-space me-2"></div>
                 </div>
-                <div id="player2-cards" class="player-cards d-flex gap-2">
-                    <h3 class="w-100">Jugador 2</h3>
-                    <div class="trainer-select-container d-flex align-items-center mb-3 w-100">
-                        <select id="player2-trainers" class="form-select me-3"></select>
-                        <div id="player2-trainer-image" class="trainer-image-circle"></div>
-                    </div>
-                    <div class="card-space me-2"></div>
-                    <div class="card-space me-2"></div>
-                    <div class="card-space me-2"></div>
-                    <div class="card-space me-2"></div>
-                    <div class="card-space me-2"></div>
+                <div class="d-flex gap-3 flex-wrap">
+                    <button id="start-player1" class="btn btn-primary">Comenzar Jugador 1</button>
+                    <button id="start-player2" class="btn btn-primary" disabled>Comenzar Jugador 2</button>
+                    <a href="game.html" class="btn btn-primary">¡Ir a la Batalla!</a>
+                    <button id="reset-selection" class="btn btn-secondary">Volver a Seleccionar</button>
                 </div>
             </div>
-            <div class="d-flex gap-3 flex-wrap">
-                <button id="start-player1" class="btn btn-primary">Comenzar Jugador 1</button>
-                <button id="start-player2" class="btn btn-primary" disabled>Comenzar Jugador 2</button>
-                <a href="game.html" class="btn btn-primary">¡Ir a la Batalla!</a>
-                <button id="reset-selection" class="btn btn-secondary">Volver a Seleccionar</button>
-            </div>
-        </div>
     </div>
 
     <!-- Bootstrap JS Bundle CDN (Popper + Bootstrap JS) -->

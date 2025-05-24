@@ -1,230 +1,209 @@
-/* Estilo general */
+/* Estilo general inspirado en Yu-Gi-Oh */
 body {
-    background-color: #222;
-    color: #ddd;
-    font-family: 'Arial', sans-serif;
+    background-color: #0b0c10;
+    color: #f0e6d2;
+    font-family: 'Trebuchet MS', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
 }
 
-/* Títulos */
-h1, h2, h3 {
-    color: #e53935;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-/* Contenedor principal */
 .container {
-    background-color: #333;
-    border-radius: 8px;
-    padding: 30px;
-    width: 95%;
-    max-width: none;
+    background: linear-gradient(135deg, #1f2833, #66fcf1);
+    border-radius: 15px;
+    padding: 20px 40px;
+    width: 1400px;
+    box-shadow: 0 0 20px #45a29e;
+    margin-top: 30px;
     position: relative;
-    /* Eliminar scroll vertical */
-    overflow-y: visible;
-    max-height: none;
 }
 
-.cards-area {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    overflow-x: visible;
-    padding-bottom: 10px;
+h1 {
+    font-family: 'Copperplate', 'Papyrus', fantasy;
+    font-size: 3rem;
+    color: #c5a880;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 5px #000;
 }
 
-.player-container {
-    margin-bottom: 20px;
-    min-width: auto;
+/* Layout de batalla */
+.battle-layout {
     display: flex;
     justify-content: flex-start;
-    flex-wrap: nowrap;
-    gap: 10px;
-}
-
-/* Botón de área del juego */
-#game-area {
-    background-color: #444;
-    border: none;
-    border-radius: 4px;
-    padding: 20px;
-    margin-top: 20px;
-    cursor: pointer;
-    color: white;
-}
-
-#game-area:disabled {
-    background-color: #666;
-    cursor: not-allowed;
-}
-
-/* Botones */
-.btn-primary {
-    background-color: #e53935;
-    border: none;
-    color: white;
-    padding: 15px 30px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 10px 5px;
-}
-
-.btn-primary:hover:not(:disabled) {
-    background-color: #b71c1c;
-}
-
-.btn-primary:disabled {
-    background-color: #666;
-    cursor: not-allowed;
-}
-
-/* Contenedores de jugadores */
-.cards-area {
-    display: flex;
+    align-items: flex-start;
+    position: relative;
     gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 10px;
 }
 
-.player-container {
-    margin-bottom: 20px;
-    min-width: 750px;
-}
-
-/* Cartas */
-.player-cards {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    gap: 10px;
-    margin-top: 10px;
-    overflow-x: auto;
-}
-
-.card-space {
-    width: 220px;
-    height: 300px;
-    background-color: #333;
-    border: 1px solid #555;
-    border-radius: 8px;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: center;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-
-.card-container {
-    border: 1px solid #e53935;
-    border-radius: 8px;
-    padding: 5px;
-    margin: 5px;
-    box-sizing: border-box;
-}
-
-.selected-card {
-    background-color: #444;
-    border: 2px solid #e53935;
-    border-radius: 8px;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.card-space .card {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-space .card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-.card-space .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(229, 57, 53, 0.6);
-}
-
-/* Posicionamiento entrenadores */
+/* Entrenadores */
 .trainer-info {
-    position: absolute;
-    background-color: #444;
-    border: 1px solid #666;
-    border-radius: 8px;
-    padding: 10px;
-    width: 150px;
-    color: white;
+    background: #1c1c1c;
+    border: 2px solid #45a29e;
+    border-radius: 12px;
+    padding: 15px;
+    width: 180px;
+    color: #66fcf1;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.7);
-    z-index: 10;
-}
-
-.card-button {
-    background-color: #333;
-    border: 1px solid #555;
-    border-radius: 8px;
-    padding: 10px;
-    width: 220px;
-    max-height: 300px;
-    overflow: hidden;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    color: #ddd;
+    box-shadow: 0 0 10px #45a29e;
+    font-weight: bold;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.card-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(229, 57, 53, 0.6);
-}
-
-.card-button img, .card-image {
-    max-width: 100%;
-    max-height: 260px;
-    width: auto;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-.trainer-top-right {
-    top: 10px;
-    right: 10px;
-}
-
-.trainer-bottom-left {
-    bottom: 10px;
-    left: 10px;
+    margin-right: 20px;
 }
 
 .trainer-image {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     background-size: cover;
     background-position: center;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 15px auto;
     border-radius: 50%;
-    border: 2px solid #e53935;
+    border: 3px solid #c5a880;
+    box-shadow: 0 0 15px #c5a880;
+}
+
+/* Área de cartas */
+.cards-area {
+    flex: 1;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedores de jugadores */
+.player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Título jugador */
+.player-container h3 {
+    font-family: 'Copperplate', 'Papyrus', fantasy;
+    font-size: 1.8rem;
+    color: #c5a880;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px #000;
+}
+
+/* Contenedor cartas */
+#player1-cards, #player2-cards {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 1200px; /* 5 cartas x 220px + gaps */
+    margin: 0 auto;
+}
+
+/* Cartas */
+.card {
+    width: 200px;
+    height: 320px;
+    background: linear-gradient(145deg, #222, #111);
+    border: 2px solid #45a29e;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #45a29e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #66fcf1;
+}
+
+/* Imagen de la carta */
+.card img.card-image {
+    width: 100%;
+    height: 240px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #c5a880;
+    margin-bottom: 10px;
+}
+
+/* Nombre de la carta */
+.card-name {
+    font-family: 'Copperplate', 'Papyrus', fantasy;
+    font-size: 1.2rem;
+    color: #c5a880;
+    text-align: center;
+    text-shadow: 1px 1px 2px #000;
+    margin: 0;
+}
+
+/* Botones */
+#game-area, #finalize-button {
+    background-color: #45a29e;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    color: #0b0c10;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 15px #45a29e;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+    display: block;
+}
+
+#game-area:disabled, #finalize-button:disabled {
+    background-color: #1c1c1c;
+    color: #555;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+#game-area:hover:not(:disabled), #finalize-button:hover:not(:disabled) {
+    background-color: #66fcf1;
+    color: #111;
+}
+
+#player1-cards, #player2-cards {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #45a29e transparent;
+}
+
+#player1-cards::-webkit-scrollbar, #player2-cards::-webkit-scrollbar {
+    height: 8px;
+}
+
+#player1-cards::-webkit-scrollbar-thumb, #player2-cards::-webkit-scrollbar-thumb {
+    background-color: #45a29e;
+    border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 1300px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+    #player1-cards, #player2-cards {
+        width: 100%;
+        gap: 10px;
+    }
+    .card {
+        width: 180px;
+        height: 260px;
+    }
+    .card img.card-image {
+        height: 220px;
+    }
 }
