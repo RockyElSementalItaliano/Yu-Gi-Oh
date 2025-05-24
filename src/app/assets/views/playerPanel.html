@@ -6,23 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Inicio de Juego - El Eclipse</title>
     <link rel="stylesheet" href="../css/home.css" />
-    <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container text-center mt-5">
-        <h1>El Eclipse</h1>
-        <div class="d-flex justify-content-center gap-3 mt-4">
-            <button class="btn btn-success" onclick="location.href='select-warriors.html'">Jugar</button>
-            <button class="btn btn-info" onclick="location.href='ranking.html'">Ranking</button>
-        </div>
-        <div class="mt-4">
-            <button class="btn btn-danger" onclick="location.href='login.html'">Cerrar sesión</button>
+    <div class="home-page-container">
+        <div class="home-card"> <h1 class="home-title">El Eclipse</h1>
+            <div class="button-group-horizontal d-flex justify-content-center gap-3 mt-4">
+                <button class="btn ygo-btn btn-play" onclick="location.href='select-warriors.html'">Jugar</button>
+                <button class="btn ygo-btn btn-ranking" onclick="location.href='ranking.html'">Ranking</button>
+            </div>
+            <div class="button-group-single mt-4">
+                <button class="btn ygo-btn btn-logout" onclick="location.href='login.html'">Cerrar Sesión</button>
+            </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS Bundle CDN (Popper + Bootstrap JS) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
