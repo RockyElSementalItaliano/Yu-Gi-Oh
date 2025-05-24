@@ -1,108 +1,71 @@
 body {
-    background-color: #080618; /* Azul noche muy oscuro, casi negro */
-    color: #E0E0E0; /* Texto claro, un gris suave */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex; /* Usamos flex para centrar el home-page-container */
+    background-color: #1a1a1a; /* Fondo muy oscuro, casi negro */
+    color: #d1d1d1; /* Texto gris claro */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
-    padding: 20px; /* Espacio alrededor si el contenido es más pequeño que la ventana */
-    background-image: url('https://i.pinimg.com/originals/9f/0a/cb/9f0acb155199a89f2a4b8c9392e9651f.gif'); /* Fondo animado de duelo */
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: screen;
 }
 
-.home-page-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.home-card {
-    background-color: rgba(15, 22, 46, 0.88); /* Azul oscuro semi-transparente */
-    border: 3px solid #F9D923; /* Borde dorado brillante */
-    border-radius: 15px;
-    box-shadow: 0 0 15px #F9D923, 0 0 30px #f9d8236c, inset 0 0 10px rgba(249, 217, 35, 0.3);
-    padding: 40px; /* Más padding interno */
-    width: 100%;
-    max-width: 600px; /* Ancho máximo para el card */
+h1 {
+    color: #e53935; /* Rojo intenso para el título */
     text-align: center;
-    backdrop-filter: blur(4px);
+    margin-bottom: 30px;
+    font-size: 2.5em; /* Tamaño de fuente más grande */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para el título */
 }
 
-.home-title {
-    color: #F9D923; /* Título dorado */
-    text-shadow: 0 0 5px #F9D923, 0 0 10px #000000, 3px 3px 3px #000000; /* Sombra más pronunciada */
-    margin-bottom: 40px; /* Más espacio debajo del título */
-    font-size: 3.5em; /* Título más grande y épico */
-    letter-spacing: 2px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* Estilos base para los botones temáticos de Yu-Gi-Oh! */
-.ygo-btn {
-    color: #E0E0E0;
-    border: none;
+.container {
+    background-color: #282828; /* Contenedor gris oscuro */
+    border: 1px solid #444; /* Borde gris oscuro */
     border-radius: 8px;
-    padding: 12px 28px; /* Buen tamaño para botones clickeables */
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.1em; /* Tamaño de fuente para botones */
-    transition: all 0.3s ease;
+    padding: 30px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.btn {
+    padding: 15px 30px;
+    text-align: center;
     text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    min-width: 180px; /* Ancho mínimo para que los botones no sean demasiado pequeños */
+    display: block; /* Botones uno encima del otro */
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    margin: 20px auto; /* Centrado y margen */
+    width: 250px; /* Ancho fijo para los botones */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para los botones */
 }
 
-/* Botón Jugar (Principal - Dorado) */
-.btn-play {
-    background: linear-gradient(145deg, #F9D923, #B8860B);
-    color: #101020; /* Texto oscuro para contraste con dorado */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.4), 0 0 10px #F9D923;
+.btn-success {
+    background-color: #333; /* Gris oscuro para el botón "Crear Partida" */
+    color: #d1d1d1;
 }
 
-.btn-play:hover, .btn-play:focus {
-    background: linear-gradient(145deg, #FFEA70, #CF9710); /* Dorado más brillante */
-    color: #000000;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 15px #FFEA70, inset 0 0 5px rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
+.btn-success:hover {
+    background-color: #444; /* Gris más claro al pasar el ratón */
 }
 
-/* Botón Ranking (Secundario - Púrpura) */
-.btn-ranking {
-    background: linear-gradient(145deg, #6A1B9A, #4A0E7A); /* Gradiente púrpura místico */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(106, 27, 154, 0.5);
+.btn-info {
+    background-color: #2a2a2a; /* Gris muy oscuro para el botón "Ranking" */
+    color: #d1d1d1;
 }
 
-.btn-ranking:hover, .btn-ranking:focus {
-    background: linear-gradient(145deg, #8E24AA, #5E35B1); /* Púrpura más brillante */
-    color: #FFFFFF;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 0 12px rgba(142, 36, 170, 0.7);
-    transform: translateY(-2px);
+.btn-info:hover {
+    background-color: #3a3a3a; /* Gris ligeramente más claro al pasar el ratón */
 }
 
-/* Botón Cerrar Sesión (Terciario/Acción especial - Rojo Oscuro/Carmesí) */
-.btn-logout {
-    background: linear-gradient(145deg, #C62828, #8E0000); /* Rojo oscuro "peligroso" */
-    color: #E0E0E0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(198, 40, 40, 0.5);
+.mt-4 {
+    margin-top: 20px;
 }
 
-.btn-logout:hover, .btn-logout:focus {
-    background: linear-gradient(145deg, #E53935, #B71C1C); /* Rojo más intenso */
-    color: #FFFFFF;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 0 12px rgba(229, 57, 53, 0.7);
-    transform: translateY(-2px);
-}
-
-/* Contenedores para los grupos de botones para asegurar el centrado correcto */
-.button-group-horizontal, .button-group-single {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+.text-center {
+    text-align: center;
 }
