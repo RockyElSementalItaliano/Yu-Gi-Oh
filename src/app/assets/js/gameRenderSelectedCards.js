@@ -30,6 +30,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // Función para limpiar la selección guardada en localStorage
+    function clearSavedSelection() {
+        localStorage.removeItem('selectedCards');
+        localStorage.removeItem('selectedTrainers');
+    }
+
     // Cargar las cartas seleccionadas desde localStorage y mostrarlas
     async function loadSelectedCards() {
         const selectedCardsJSON = localStorage.getItem('selectedCards');
@@ -55,6 +61,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             finalizeButton.disabled = false;
         }
     }
+
+    // Añadir botón para reiniciar partida y limpiar selección guardada
+    const resetButton = document.createElement('button');
+    resetButton.textContent = 'Reiniciar Partida';
+    resetButton.classList.add('btn-primary', 'mt-3');
+    resetButton.addEventListener('click', () => {
+        clearSavedSelection();
+        window.location.href = 'select-warriors.html';
+    });
+    document.querySelector('.container').appendChild(resetButton);
 
     loadSelectedCards();
 });

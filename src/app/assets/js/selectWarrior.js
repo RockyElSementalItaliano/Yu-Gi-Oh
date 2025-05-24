@@ -210,87 +210,105 @@ document.addEventListener('DOMContentLoaded', async () => {
         resetSelection();
     });
 
-loadWarriors();
-
-// Función para cargar entrenadores y llenar los selectores con imagen
-async function loadTrainers() {
-    try {
-        const response = await fetch('/game/trainers');
-        if (!response.ok) throw new Error('Error al cargar entrenadores');
-        const trainers = await response.json();
-
-        if (player1TrainerSelect && player2TrainerSelect) {
-            player1TrainerSelect.innerHTML = '<option value="">Seleccione un entrenador</option>';
-            player2TrainerSelect.innerHTML = '<option value="">Seleccione un entrenador</option>';
-
-            trainers.forEach(trainer => {
-                const option1 = document.createElement('option');
-                option1.value = trainer.id;
-                option1.textContent = trainer.name;
-                option1.dataset.image = trainer.image; // Guardar ruta imagen en dataset
-                player1TrainerSelect.appendChild(option1);
-
-                const option2 = document.createElement('option');
-                option2.value = trainer.id;
-                option2.textContent = trainer.name;
-                option2.dataset.image = trainer.image; // Guardar ruta imagen en dataset
-                player2TrainerSelect.appendChild(option2);
-            });
-
-            // Agregar eventos para evitar selección duplicada
-            player1TrainerSelect.addEventListener('change', () => {
-                updateTrainerImage(player1TrainerSelect, 'player1-trainer-image');
-                updateTrainerOptions();
-            });
-            player2TrainerSelect.addEventListener('change', () => {
-                updateTrainerImage(player2TrainerSelect, 'player2-trainer-image');
-                updateTrainerOptions();
-            });
+    // Guardar selección en localStorage al finalizar selección de ambos jugadores
+    battleLink.addEventListener('click', (event) => {
+        if (selectedCards[1].length !== 5 || selectedCards[2].length !== 5) {
+            event.preventDefault();
+            alert('Ambos jugadores deben seleccionar 5 cartas para continuar.');
+            return;
         }
-    } catch (error) {
-        console.error('Error al cargar entrenadores:', error);
+        // Guardar selección de cartas
+        localStorage.setItem('selectedCards', JSON.stringify(selectedCards));
+        // Guardar selección de entrenadores
+        const selectedTrainers = {
+            player1: player1TrainerSelect.value,
+            player2: player2TrainerSelect.value
+        };
+        localStorage.setItem('selectedTrainers', JSON.stringify(selectedTrainers));
+    });
+
+    loadWarriors();
+
+    // Función para cargar entrenadores y llenar los selectores con imagen
+    async function loadTrainers() {
+        try {
+            const response = await fetch('/game/trainers');
+            if (!response.ok) throw new Error('Error al cargar entrenadores');
+            const trainers = await response.json();
+
+            if (player1TrainerSelect && player2TrainerSelect) {
+                player1TrainerSelect.innerHTML = '<option value="">Seleccione un entrenador</option>';
+                player2TrainerSelect.innerHTML = '<option value="">Seleccione un entrenador</option>';
+
+                trainers.forEach(trainer => {
+                    const option1 = document.createElement('option');
+                    option1.value = trainer.id;
+                    option1.textContent = trainer.name;
+                    option1.dataset.image = trainer.image; // Guardar ruta imagen en dataset
+                    player1TrainerSelect.appendChild(option1);
+
+                    const option2 = document.createElement('option');
+                    option2.value = trainer.id;
+                    option2.textContent = trainer.name;
+                    option2.dataset.image = trainer.image; // Guardar ruta imagen en dataset
+                    player2TrainerSelect.appendChild(option2);
+                });
+
+                // Agregar eventos para evitar selección duplicada
+                player1TrainerSelect.addEventListener('change', () => {
+                    updateTrainerImage(player1TrainerSelect, 'player1-trainer-image');
+                    updateTrainerOptions();
+                });
+                player2TrainerSelect.addEventListener('change', () => {
+                    updateTrainerImage(player2TrainerSelect, 'player2-trainer-image');
+                    updateTrainerOptions();
+                });
+            }
+        } catch (error) {
+            console.error('Error al cargar entrenadores:', error);
+        }
     }
-}
 
-// Función para actualizar la imagen del entrenador seleccionado
-function updateTrainerImage(selectElement, imageElementId) {
-    const select = selectElement;
-    const imageElement = document.getElementById(imageElementId);
-    if (!select || !imageElement) return;
+    // Función para actualizar la imagen del entrenador seleccionado
+    function updateTrainerImage(selectElement, imageElementId) {
+        const select = selectElement;
+        const imageElement = document.getElementById(imageElementId);
+        if (!select || !imageElement) return;
 
-    const selectedOption = select.options[select.selectedIndex];
-    if (selectedOption && selectedOption.dataset.image) {
-        imageElement.style.backgroundImage = `url(${selectedOption.dataset.image})`;
-    } else {
-        imageElement.style.backgroundImage = '';
+        const selectedOption = select.options[select.selectedIndex];
+        if (selectedOption && selectedOption.dataset.image) {
+            imageElement.style.backgroundImage = `url(${selectedOption.dataset.image})`;
+        } else {
+            imageElement.style.backgroundImage = '';
+        }
     }
-}
 
-// Función para actualizar las opciones de los selectores para evitar selección duplicada
-function updateTrainerOptions() {
-    const player1Selected = player1TrainerSelect.value;
-    const player2Selected = player2TrainerSelect.value;
+    // Función para actualizar las opciones de los selectores para evitar selección duplicada
+    function updateTrainerOptions() {
+        const player1Selected = player1TrainerSelect.value;
+        const player2Selected = player2TrainerSelect.value;
 
-    Array.from(player1TrainerSelect.options).forEach(option => {
-        option.disabled = option.value !== '' && option.value === player2Selected;
-    });
+        Array.from(player1TrainerSelect.options).forEach(option => {
+            option.disabled = option.value !== '' && option.value === player2Selected;
+        });
 
-    Array.from(player2TrainerSelect.options).forEach(option => {
-        option.disabled = option.value !== '' && option.value === player1Selected;
-    });
-}
+        Array.from(player2TrainerSelect.options).forEach(option => {
+            option.disabled = option.value !== '' && option.value === player1Selected;
+        });
+    }
 
-loadTrainers(); // Cargar entrenadores para selección
+    loadTrainers(); // Cargar entrenadores para selección
 
-// Actualizar imagen de entrenador al cambiar selección
-if (player1TrainerSelect) {
-    player1TrainerSelect.addEventListener('change', () => {
-        updateTrainerImage(player1TrainerSelect, 'player1-trainer-image');
-    });
-}
-if (player2TrainerSelect) {
-    player2TrainerSelect.addEventListener('change', () => {
-        updateTrainerImage(player2TrainerSelect, 'player2-trainer-image');
-    });
-}
+    // Actualizar imagen de entrenador al cambiar selección
+    if (player1TrainerSelect) {
+        player1TrainerSelect.addEventListener('change', () => {
+            updateTrainerImage(player1TrainerSelect, 'player1-trainer-image');
+        });
+    }
+    if (player2TrainerSelect) {
+        player2TrainerSelect.addEventListener('change', () => {
+            updateTrainerImage(player2TrainerSelect, 'player2-trainer-image');
+        });
+    }
 });
+
