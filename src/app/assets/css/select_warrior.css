@@ -1,197 +1,348 @@
+/* ../css/select_warrior.css */
+
 body {
     background-image: url('https://wallpapers.com/images/featured/720p-5wfq1i9etj969c3k.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
+    background-color: #080618;
+    color: #E0E0E0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 0;
-    padding-top: 70px; /* Altura del navbar fijo */
-    font-family: Arial, sans-serif;
+    padding-top: 75px; /* Ajusta esto si la altura de tu navbar es diferente */
 }
 
-h1,
-h2 {
-    color: #e53935;
+.content-area {
+    padding-bottom: 30px;
+}
+
+/* --- Navbar Temático --- */
+.navbar.fixed-top {
+    background-color: rgba(10, 10, 25, 0.92) !important;
+    border-bottom: 2px solid #F9D923;
+    box-shadow: 0 2px 10px rgba(249, 217, 35, 0.3);
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.navbar-brand {
+    color: #F9D923 !important;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-shadow: 0 0 3px #F9D923;
+}
+
+.navbar .btn.btn-outline-light {
+    background: linear-gradient(145deg, #6A1B9A, #4A0E7A);
+    color: #E0E0E0 !important;
+    border: 1px solid #8E24AA;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 0 5px rgba(106, 27, 154, 0.4);
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn.btn-outline-light:hover,
+.navbar .btn.btn-outline-light:focus {
+    background: linear-gradient(145deg, #8E24AA, #5E35B1);
+    color: #FFFFFF !important;
+    border-color: #CF9710;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4), 0 0 10px rgba(142, 36, 170, 0.6);
+}
+.navbar .btn.btn-outline-light i {
+    margin-right: 0.5em;
+}
+
+/* --- Títulos de Sección (h2, h3) --- */
+#card-selection h2,
+#selected-warriors h2 {
+    color: #F9D923;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 5px #F9D923, 0 0 8px #000000, 2px 2px 2px #000000;
+}
+
+.player-cards h3.w-100 {
+    color: #C0C0C0;
     text-align: center;
     margin-bottom: 20px;
-}
-
-/* Sección principal de selección de cartas */
-#card-selection .cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    padding: 10px;
-}
-
-#card-selection .card-button {
-    background-color: #333;
-    border: 1px solid #555;
-    border-radius: 12px;
-    padding: 10px;
-    width: 220px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: #ddd;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 0 8px rgba(0,0,0,0.5);
-}
-
-#card-selection .card-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(229, 57, 53, 0.8);
-    /* Glow dinámico */
-}
-
-#card-selection .card-button img {
-    width: 180px;
-    height: 240px;
-    object-fit: cover;
-    border-radius: 12px;
-    border: 3px solid #e53935;
-    margin-bottom: 10px;
-}
-
-/* Sección de Guerreros Seleccionados */
-#selected-warriors {
-    text-align: center;
-    margin-top: 20px;
-}
-
-#selected-warriors .player-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin: 10px 0;
-}
-
-#selected-warriors .card-space {
-    width: 220px;
-    /* Ajusta el ancho */
-    min-height: 320px;
-    background-color: #222;
-    border: 4px solid #d32f2f; /* borde rojo estilizado */
-    border-radius: 16px;
-    margin: 10px;
-    padding: 10px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    box-shadow: 0 0 15px rgba(211, 47, 47, 0.8);
-    transition: box-shadow 0.3s ease;
-}
-
-#selected-warriors .card-space:hover {
-    box-shadow: 0 0 25px rgba(229, 57, 53, 1);
-}
-
-#selected-warriors .card-space img {
-    width: 180px;
-    height: 240px;
-    object-fit: cover;
-    border-radius: 12px;
-    border: 3px solid #b71c1c;
-    margin-bottom: 10px;
-}
-
-#selected-warriors .card-space p {
-    color: #eee;
-    font-size: 1rem;
-    margin: 0;
-    padding: 0 5px;
-    text-align: center;
-    background-color: transparent; /* quitar fondo blanco */
-}
-
-/* Cartas seleccionadas */
-.selected-card {
-    background-color: #444;
-    border: 2px solid #e53935;
-    border-radius: 12px;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(229, 57, 53, 0.7);
-}
-
-/* Nombres y atributos */
-.card-name {
-    font-size: 1.2rem;
+    font-size: 1.8em;
     font-weight: bold;
-    color: #fff;
-    margin-bottom: 5px;
-    text-shadow: 1px 1px 2px #000; /* sombra para mejorar legibilidad */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px #000;
 }
 
-.card-attributes {
-    font-size: 1rem;
-    color: #f0f0f0;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 2px #000; /* sombra para mejorar legibilidad */
+/* --- Áreas de Selección --- */
+#card-selection,
+#selected-warriors {
+    background-color: rgba(15, 22, 46, 0.85); /* Ligeramente más opaco */
+    border: 2px solid #4A0E7A;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px !important; 
+    box-shadow: 0 0 15px rgba(74, 14, 122, 0.6), 0 0 25px rgba(15, 22, 46, 0.5) inset; /* Añadido inset shadow */
 }
 
-/* Botones */
-.btn-primary {
-    background-color: #e53935;
-    border: none;
-    color: white;
-    padding: 15px 30px;
+/* --- Pool de Cartas para Seleccionar --- */
+#warriors-container.cards {
+    gap: 12px;
+    padding: 10px;
+}
+
+#warriors-container .card-button { 
+    background-color: #181025; 
+    border: 2px solid #B8860B; 
+    border-radius: 8px; 
+    padding: 8px; 
+    width: 140px; 
+    box-sizing: border-box; 
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 20px auto;
-    font-size: 16px;
-    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+    color: #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 6px rgba(0,0,0,0.5), inset 0 0 4px rgba(184, 134, 11, 0.2);
 }
 
-.btn-primary:hover {
-    background-color: #b71c1c;
+#warriors-container .card-button:hover {
+    transform: scale(1.08); 
+    border-color: #F9D923; 
+    box-shadow: 0 0 15px #F9D923, 0 0 8px #F9D923; 
 }
 
-button:disabled,
-.btn-primary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background-color: #e53935;
-    color: #ddd;
+#warriors-container .card-button img {
+    width: 100%; 
+    height: auto;
+    aspect-ratio: 3/4; 
+    object-fit: cover;
+    border-radius: 4px; 
+    border: 1px solid #000000; 
+    margin-bottom: 6px; 
+}
+
+#warriors-container .card-button .card-name {
+    font-size: 0.9em; 
+    font-weight: bold;
+    color: #F9D923; 
+    margin-bottom: 4px;
+    text-shadow: 1px 1px 1px #000;
+    line-height: 1.2; 
+    word-break: break-word; 
+}
+
+#warriors-container .card-button .card-attribute-line {
+    font-size: 0.75em; 
+    color: #C0C0C0; 
+    text-shadow: 1px 1px 1px #000;
+    line-height: 1.3; 
+    margin: 1px 0; 
+    text-align: left; 
+    padding-left: 5px; 
+}
+
+/* --- Sección de Guerreros Seleccionados --- */
+#selected-warriors .d-flex.justify-content-center.gap-4 { /* Contenedor de player1-cards y player2-cards */
+    gap: 30px !important;
+}
+
+.player-cards { /* Aplica a #player1-cards y #player2-cards */
+    background-color: rgba(20, 20, 40, 0.75); 
+    border: 2px solid #6A1B9A; 
+    border-radius: 10px;
+    padding: 20px;
+    flex-basis: 48%; 
+    min-width: 320px; /* Ajustar si es necesario para que quepan 5 cartas en pantallas pequeñas */
+    box-shadow: inset 0 0 10px rgba(106, 27, 154, 0.5);
+    /* display: flex; ya está por la clase .d-flex de Bootstrap */
+    /* gap: (valor); ya está por la clase .gap-2 de Bootstrap (0.5rem) */
+    flex-wrap: wrap; /* CLAVE: Permite que los elementos hijos se envuelvan */
+    justify-content: center; /* Centra las ranuras de cartas si no llenan el ancho */
+    align-content: flex-start; /* Alinea las líneas de flex al inicio del contenedor */
 }
 
 .trainer-select-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 15px;
-    position: relative;
+    gap: 15px !important;
+    justify-content: flex-start; 
+    /* w-100, d-flex, align-items-center, mb-3 ya están en el HTML */
 }
 
-.trainer-select-container select {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    font-size: 1rem;
+.trainer-select-container select.form-select { 
+    background-color: rgba(10, 10, 25, 0.85);
+    color: #E0E0E0;
+    border: 2px solid #4A0E7A; 
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 1em;
+    flex-grow: 1; 
+    min-width: 150px; /* Evita que el select se encoja demasiado */
+    /* max-width: calc(100% - 95px); Puede ser problemático con w-100 en el padre, verificar */
+}
+.trainer-select-container select.form-select:focus {
+    outline: none;
+    border-color: #D4AF37; 
+    box-shadow: 0 0 8px #D4AF37, inset 0 0 4px rgba(212, 175, 55,0.3);
+    background-color: rgba(20, 20, 35, 0.95);
 }
 
 .trainer-image-circle {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    background-color: #ccc;
+    background-color: #222; /* Un poco más oscuro para el placeholder */
     background-size: cover;
     background-position: center;
-    border: 3px solid #555;
-    margin-top: 10px;
-    /* Position below the select */
-    position: relative;
+    border: 3px solid #F9D923; 
+    box-shadow: 0 0 10px #F9D923, inset 0 0 5px rgba(0,0,0,0.5); /* Sombra más pronunciada */
+    flex-shrink: 0; 
+}
+
+/* Ranuras para las cartas seleccionadas */
+.player-cards .card-space { 
+    /* Estas son las clases del HTML: card-space me-2 selected-card */
+    /* Aplicamos los estilos de ygo-card-slot aquí, anulando lo necesario */
+    width: 100px !important;  /* Ancho fijo para la ranura */
+    height: 140px !important; /* Alto fijo para la ranura */
+    min-height: 140px !important; /* Anula el min-height del CSS original si lo tenía */
+    background-color: rgba(10, 10, 25, 0.7) !important; 
+    border: 2px dashed #8E24AA !important; /* Borde púrpura más visible */
+    border-radius: 8px !important;
+    display: flex !important; /* Para centrar contenido (placeholder o imagen) */
+    align-items: center !important;
+    justify-content: center !important;
+    color: #8E24AA; 
+    font-size: 0.85em; /* Un poco más pequeño para el texto "Invocar" */
+    font-weight: bold;
+    padding: 4px !important; /* Anular padding original */
+    text-align: center;
+    box-shadow: inset 0 0 8px rgba(74, 14, 122, 0.6) !important; /* Sombra interna más notoria */
+    transition: all 0.3s ease;
+    overflow: hidden;
+    /* El .gap-2 en .player-cards debería manejar el espaciado. */
+    /* me-2 (margin-end: 0.5rem) en el HTML también contribuye. */
+    /* No es necesario margin aquí si gap funciona bien con flex-wrap. */
+}
+
+.player-cards .card-space.filled { /* Estilo cuando el slot tiene una carta (clase añadida por JS) */
+    border-style: solid !important;
+    border-color: #F9D923 !important; 
+    padding: 0 !important; 
+    background-color: #101020 !important; /* Fondo oscuro cuando está llena */
+}
+.player-cards .card-space:not(.filled):hover { 
+    border-color: #F9D923 !important;
+    color: #F9D923 !important;
+    box-shadow: inset 0 0 10px rgba(249, 217, 35, 0.7) !important;
+}
+.player-cards .card-space img { 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px; /* Ligeramente más pequeño que la ranura para que el borde del slot (si está filled) se vea */
+}
+.player-cards .card-space .slot-placeholder-text { 
+    opacity: 0.7;
+}
+
+/* Ocultar elementos del CSS original dentro de las ranuras vacías si interfieren */
+.player-cards .card-space .card-name,
+.player-cards .card-space .card-description {
+    display: none !important;
+}
+
+
+/* --- Botones de Acción Generales --- */
+#selected-warriors .d-flex.gap-3.flex-wrap {
+    padding-top: 20px;
+    justify-content: center;
+}
+
+/* Aplicando estilos base YGO a los botones Bootstrap */
+#selected-warriors .btn {
+    border-radius: 8px !important;
+    padding: 12px 25px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    font-size: 1.05em !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    min-width: 200px; /* Ligeramente más pequeños si es necesario */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 5px !important;
+    border: none !important; /* Para asegurar que los gradientes se vean bien */
+    line-height: 1.5; /* Asegurar altura de línea consistente */
+}
+
+/* Botón "¡Ir a la Batalla!" */
+#selected-warriors a.btn.btn-primary[href="game.html"] {
+    background-image: linear-gradient(145deg, #F9D923, #B8860B) !important;
+    background-color: #F9D923 !important; /* Fallback */
+    color: #101020 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4), 0 0 10px #F9D923 !important;
+}
+#selected-warriors a.btn.btn-primary[href="game.html"]:hover,
+#selected-warriors a.btn.btn-primary[href="game.html"]:focus {
+    background-image: linear-gradient(145deg, #FFEA70, #CF9710) !important;
+    background-color: #FFEA70 !important; /* Fallback */
+    color: #000000 !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 15px #FFEA70, inset 0 0 5px rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-2px);
+}
+
+/* Botones "Comenzar Jugador 1/2" */
+#selected-warriors button#start-player1.btn.btn-primary,
+#selected-warriors button#start-player2.btn.btn-primary {
+    background-image: linear-gradient(145deg, #6A1B9A, #4A0E7A) !important;
+    background-color: #6A1B9A !important; /* Fallback */
+    color: #E0E0E0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(106, 27, 154, 0.5) !important;
+}
+#selected-warriors button#start-player1.btn.btn-primary:hover:not(:disabled),
+#selected-warriors button#start-player1.btn.btn-primary:focus:not(:disabled),
+#selected-warriors button#start-player2.btn.btn-primary:hover:not(:disabled),
+#selected-warriors button#start-player2.btn.btn-primary:focus:not(:disabled) {
+    background-image: linear-gradient(145deg, #8E24AA, #5E35B1) !important;
+    background-color: #8E24AA !important; /* Fallback */
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 0 12px rgba(142, 36, 170, 0.7) !important;
+    transform: translateY(-2px);
+}
+
+/* Botón "Volver a Seleccionar" */
+#selected-warriors button#reset-selection.btn.btn-secondary {
+    background-image: linear-gradient(145deg, #C62828, #8E0000) !important;
+    background-color: #C62828 !important; /* Fallback */
+    color: #E0E0E0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(198, 40, 40, 0.5) !important;
+}
+#selected-warriors button#reset-selection.btn.btn-secondary:hover,
+#selected-warriors button#reset-selection.btn.btn-secondary:focus {
+    background-image: linear-gradient(145deg, #E53935, #B71C1C) !important;
+    background-color: #E53935 !important; /* Fallback */
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 0 12px rgba(229, 57, 53, 0.7) !important;
+    transform: translateY(-2px);
+}
+
+/* Estilo para botones Bootstrap deshabilitados */
+#selected-warriors .btn:disabled { 
+    background-image: none !important; /* Quitar gradiente en deshabilitado */
+    background-color: #454545 !important; 
+    color: #777 !important; 
+    border-color: #3a3a3a !important;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3) !important; 
+    cursor: not-allowed !important;
+    opacity: 0.65; 
+    transform: none !important;
 }
