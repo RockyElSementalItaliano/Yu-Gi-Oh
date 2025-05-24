@@ -6,42 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Juego de Guerreros</title>
     <link rel="stylesheet" href="/assets/css/register.css">
-    <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="text-center mb-4">Registro</h1>
+    <div class="register-container"> <div class="row justify-content-center w-100"> <div class="col-md-8 col-lg-6 col-xl-5"> <div class="register-card"> <div class="card-body"> <h1 class="register-title">Únete al Duelo</h1>
                         <div id="alert-container"></div>
                         <form id="register-form" aria-label="Formulario de registro">
-                            <div class="form-group">
-                                <label for="username">Usuario:</label>
-                                <input type="text" id="username" class="form-control" placeholder="Usuario" required>
+                            <div class="form-input-group"> <label for="username">Nombre de Duelista:</label>
+                                <input type="text" id="username" class="form-input" placeholder="Elige tu alias" required> </div>
+                            <div class="form-input-group">
+                                <label for="password">Contraseña Milenaria:</label>
+                                <input type="password" id="password" class="form-input" placeholder="Tu secreto más guardado" required>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Contraseña:</label>
-                                <input type="password" id="password" class="form-control" placeholder="Contraseña" required>
+                            <div class="form-input-group">
+                                <label for="confirm_password">Confirma tu Contraseña:</label>
+                                <input type="password" id="confirm_password" class="form-input" placeholder="Repite el encantamiento" required>
                             </div>
-                            <div class="form-group">
-                                <label for="confirm_password">Confirmar Contraseña:</label>
-                                <input type="password" id="confirm_password" class="form-control" placeholder="Confirmar Contraseña" required>
-                            </div>
-                            <button type="button" id="register-btn" class="btn btn-primary btn-block">Registrarse</button>
-                            <a href="/assets/views/login.html" class="btn btn-secondary btn-block mt-2">Cancelar</a>
-                        </form>
+                            <button type="button" id="register-btn" class="register-button btn btn-primary">Crear Invocador</button>
+                            <a href="/assets/views/login.html" class="cancel-link btn btn-secondary btn-block mt-3">Volver al Lobby</a> </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Bootstrap JS Bundle CDN (Popper + Bootstrap JS) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/js/main.js"></script> <!-- Conexión al archivo JavaScript -->
-</body>
+    <script src="/assets/js/main.js"></script> </body>
 
 </html>
