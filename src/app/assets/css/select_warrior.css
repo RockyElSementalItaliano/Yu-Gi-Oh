@@ -123,12 +123,6 @@ h2 {
     box-shadow: 0 0 10px rgba(229, 57, 53, 0.7);
 }
 
-/* Ocultar nombre y descripción en cartas seleccionadas */
-.selected-card .card-name,
-.selected-card .card-description {
-    display: none;
-}
-
 /* Nombres y atributos */
 .card-name {
     font-size: 1.2rem;

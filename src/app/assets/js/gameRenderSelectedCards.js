@@ -16,15 +16,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         card.innerHTML = `
             <img src="../img/${warrior.image_url}" alt="${warrior.name}" class="card-image" />
             <h3 class="card-name">${warrior.name}</h3>
-
+            <p class="card-description">${warrior.description}</p>
         `;
         return card;
     }
 
-    // Función para renderizar las cartas seleccionadas de un jugador, máximo 5 cartas
+    // Función para renderizar las cartas seleccionadas de un jugador
     function renderSelectedCards(container, warriors) {
         container.innerHTML = '';
-        warriors.slice(0, 5).forEach(warrior => {
+        warriors.forEach(warrior => {
             const card = createWarriorCard(warrior);
             container.appendChild(card);
         });
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         renderSelectedCards(player2CardsContainer, player2Warriors);
 
         // Habilitar botones si hay cartas
-        if (player1Warriors.length >= 5 && player2Warriors.length >= 5) {
+        if (player1Warriors.length === 5 && player2Warriors.length === 5) {
             startBattleButton.disabled = false;
             finalizeButton.disabled = false;
         }
