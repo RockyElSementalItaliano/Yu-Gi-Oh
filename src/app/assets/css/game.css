@@ -1,230 +1,303 @@
-/* Estilo general */
+/* ../css/game.css */
+
 body {
-    background-color: #222;
-    color: #ddd;
-    font-family: 'Arial', sans-serif;
+    background-image: url('https://wallpapers.com/images/featured/720p-5wfq1i9etj969c3k.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #080618; /* Color base oscuro si la imagen no carga */
+    color: #E0E0E0; /* Texto claro general */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 15px; /* Padding general reducido */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
-/* Títulos */
-h1, h2, h3 {
-    color: #e53935;
+.container { /* Contenedor principal de la página de batalla */
+    background-color: rgba(15, 22, 46, 0.93); /* Ligeramente más opaco */
+    border: 3px solid #F9D923;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #F9D923, 0 0 40px rgba(249, 217, 35, 0.4), inset 0 0 15px rgba(249, 217, 35, 0.25);
+    padding: 15px; /* Padding interno reducido */
+    width: 100%;
+    max-width: 1000px; /* Reducido para un layout más compacto en general */
+    margin-top: 10px; /* Margen superior reducido */
+    margin-bottom: 20px;
     text-align: center;
-    margin-bottom: 10px;
+    backdrop-filter: blur(4px);
 }
 
-/* Contenedor principal */
-.container {
-    background-color: #333;
-    border-radius: 8px;
-    padding: 30px;
-    width: 95%;
-    max-width: none;
-    position: relative;
-    /* Eliminar scroll vertical */
-    overflow-y: visible;
-    max-height: none;
-}
-
-.cards-area {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    overflow-x: visible;
-    padding-bottom: 10px;
-}
-
-.player-container {
+h1 { /* Título "¡Batalla en Progreso!" */
+    color: #F9D923;
+    text-shadow: 0 0 5px #F9D923, 0 0 10px #000000, 2px 2px 3px #000000;
     margin-bottom: 20px;
-    min-width: auto;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    gap: 10px;
+    font-size: 2.4em; /* Reducido */
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-/* Botón de área del juego */
-#game-area {
-    background-color: #444;
-    border: none;
-    border-radius: 4px;
-    padding: 20px;
-    margin-top: 20px;
-    cursor: pointer;
-    color: white;
+.battle-layout {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* Entrenador | Área Central | Entrenador */
+    grid-template-rows: auto auto auto;    /* Fila P1 | Fila Botones | Fila P2 */
+    gap: 10px; /* Gap reducido entre áreas del grid */
+    align-items: center;
+    width: 100%;
 }
 
-#game-area:disabled {
-    background-color: #666;
-    cursor: not-allowed;
-}
-
-/* Botones */
-.btn-primary {
-    background-color: #e53935;
-    border: none;
-    color: white;
-    padding: 15px 30px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 10px 5px;
-}
-
-.btn-primary:hover:not(:disabled) {
-    background-color: #b71c1c;
-}
-
-.btn-primary:disabled {
-    background-color: #666;
-    cursor: not-allowed;
-}
-
-/* Contenedores de jugadores */
-.cards-area {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-}
-
-.player-container {
-    margin-bottom: 20px;
-    min-width: 750px;
-}
-
-/* Cartas */
-.player-cards {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    gap: 10px;
-    margin-top: 10px;
-    overflow-x: auto;
-}
-
-.card-space {
-    width: 220px;
-    height: 300px;
-    background-color: #333;
-    border: 1px solid #555;
+/* Información del Entrenador */
+.trainer-info {
+    background-color: rgba(25, 32, 56, 0.9);
+    border: 2px solid #583C87; /* Púrpura más oscuro */
     border-radius: 8px;
     padding: 8px;
+    width: 110px; /* Reducido */
+    color: #E0E0E0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5), inset 0 0 5px rgba(88,60,135,0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    text-align: center;
-    overflow: hidden;
-    flex-shrink: 0;
+    gap: 4px;
+    position: relative;
+    z-index: 1;
 }
 
-
-.card-container {
-    border: 1px solid #e53935;
-    border-radius: 8px;
-    padding: 5px;
-    margin: 5px;
-    box-sizing: border-box;
+#player1-trainer-info {
+    grid-row: 1;
+    grid-column: 1;
+    justify-self: center; /* Centrado en su celda */
+    align-self: center;
 }
 
-.selected-card {
-    background-color: #444;
-    border: 2px solid #e53935;
-    border-radius: 8px;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.card-space .card {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-space .card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-.card-space .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(229, 57, 53, 0.6);
-}
-
-/* Posicionamiento entrenadores */
-.trainer-info {
-    position: absolute;
-    background-color: #444;
-    border: 1px solid #666;
-    border-radius: 8px;
-    padding: 10px;
-    width: 150px;
-    color: white;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.7);
-    z-index: 10;
-}
-
-.card-button {
-    background-color: #333;
-    border: 1px solid #555;
-    border-radius: 8px;
-    padding: 10px;
-    width: 220px;
-    max-height: 300px;
-    overflow: hidden;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    color: #ddd;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.card-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(229, 57, 53, 0.6);
-}
-
-.card-button img, .card-image {
-    max-width: 100%;
-    max-height: 260px;
-    width: auto;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-.trainer-top-right {
-    top: 10px;
-    right: 10px;
-}
-
-.trainer-bottom-left {
-    bottom: 10px;
-    left: 10px;
+#player2-trainer-info {
+    grid-row: 3;
+    grid-column: 3;
+    justify-self: center; /* Centrado en su celda */
+    align-self: center;
 }
 
 .trainer-image {
-    width: 100px;
-    height: 100px;
+    width: 55px; /* Reducido */
+    height: 55px; /* Reducido */
+    background-color: #1a1a2e; /* Placeholder más oscuro */
     background-size: cover;
     background-position: center;
-    margin: 0 auto 10px auto;
     border-radius: 50%;
-    border: 2px solid #e53935;
+    border: 2px solid #D4AF37; /* Dorado más antiguo */
+    box-shadow: 0 0 5px #D4AF37;
+}
+
+.trainer-name {
+    color: #D4AF37;
+    font-weight: bold;
+    font-size: 0.8em; /* Reducido */
+    text-shadow: 1px 1px 1px #000;
+    word-break: break-word;
+    line-height: 1.2;
+}
+
+/* Área Central (Cartas y Botones) */
+.cards-area {
+    grid-row: 1 / 4;
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around; /* Para distribuir mejor el espacio vertical */
+    gap: 15px; 
+    padding: 5px 0;
+    min-height: 350px; /* Ajustado */
+}
+
+.player-container {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px; /* Espacio entre H3 y .player-cards */
+}
+
+.player-container h3 { /* "Jugador 1", "Jugador 2" */
+    color: #C0C0C0;
+    font-size: 1.4em; /* Reducido */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px #000;
+    margin-bottom: 5px;
+}
+
+/* --- CONTENEDOR DE CARTAS Y CARTAS MÁS PEQUEÑAS --- */
+.player-cards { /* Contiene las 5 .card-space */
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap; 
+    gap: 6px; /* Espacio MUY reducido entre cartas */
+    padding: 4px; 
+    background-color: rgba(0,0,0,0.35); 
+    border-radius: 5px;
+    /* Ancho para 5 cartas de 75px + 4 gaps de 6px + padding (2*4px) = 375 + 24 + 8 = 407px */
+    max-width: 407px; 
+    overflow: hidden; /* No debería haber scroll si las cartas caben */
+}
+
+.card-space { /* Este es el contenedor de CADA carta individual */
+    width: 75px; /* Ancho de la CARTA */
+    height: 105px; /* Alto FIJO de la CARTA (proporción ~0.7 ideal para cartas) */
+    box-sizing: border-box; 
+    background-color: #0A0612; /* Fondo muy oscuro para la carta */
+    border: 1px solid #605030; /* Borde dorado/bronce muy sutil */
+    border-radius: 5px; 
+    padding: 3px; /* Padding interno mínimo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    text-align: center;
+    overflow: hidden; 
+    box-shadow: 0 1px 2px rgba(0,0,0,0.7), inset 0 0 2px rgba(184, 134, 11, 0.2);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    color: #D0D0D0; /* Texto general de la carta un poco más oscuro */
+    flex-shrink: 0; 
+}
+.card-space:hover {
+    transform: scale(1.07);
+    border-color: #F9D923; 
+    box-shadow: 0 2px 8px rgba(249, 217, 35, 0.5), 0 0 5px #F9D923;
+}
+
+/* IMAGEN DENTRO DE .card-space */
+.card-space img { /* Si tu JS inserta una <img> directamente */
+    width: 100%;  /* Ocupa el ancho del contenido de .card-space (75px - 2*3px padding = 69px) */
+    height: 65px; /* ALTURA FIJA para el área de la IMAGEN dentro de la carta */
+    object-fit: cover; /* Llena el área (69x65px), mantiene proporción, recorta excesos. */
+                       /* Prueba 'contain' si prefieres ver toda la imagen. */
+    border-radius: 2px; 
+    background-color: #000; /* Visible si usas 'contain' y la imagen no llena */
+    margin-bottom: 2px; /* Espacio mínimo entre imagen y nombre */
+}
+/* Si tu JS usa una clase específica para la imagen, como .ygo-card-image */
+.card-space .ygo-card-image {
+    width: 100%;
+    height: 65px; 
+    object-fit: cover; 
+    border-radius: 2px;
+    background-color: #000;
+    margin-bottom: 2px;
+}
+
+
+/* NOMBRE DE LA CARTA dentro de .card-space */
+.card-space .card-name, /* Si tu JS crea un elemento con esta clase */
+.card-space h4, /* O si es un h4 genérico */
+.card-space p:first-of-type { /* O el primer párrafo si así lo estructura el JS */
+    font-size: 0.6em; /* Muy pequeño */
+    font-weight: bold;
+    color: #E8C75A; /* Un dorado más pálido para el nombre */
+    line-height: 1.1; 
+    width: 100%; 
+    max-height: 2.2em; /* Para ~2 líneas */
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    margin-bottom: 1px;
+    padding: 0 1px;
+}
+
+/* ATRIBUTOS DE LA CARTA dentro de .card-space */
+.card-space .card-attributes, /* Si tu JS crea un div con esta clase */
+.card-space .card-attribute-line, /* O párrafos con esta clase */
+.card-space p:not(:first-of-type) { /* O los siguientes párrafos */
+    display: none; /* Ocultos por defecto por el tamaño tan reducido */
+    /* Si decides mostrarlos:
+    font-size: 0.5em; 
+    color: #999;
+    line-height: 1;
+    margin: 0; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    */
+}
+
+/* --- FIN DE MODIFICACIONES DE TAMAÑO DE CARTAS --- */
+
+/* --- Botones de Acción --- */
+.cards-area > button, 
+.cards-area > a.btn { /* Aplicar a todos los botones directos hijos de .cards-area */
+    background-image: none !important; /* Resetear por si acaso */
+    background-color: #454545 !important; /* Color base para botones */
+    color: #E0E0E0 !important;
+    border: 1px solid #6A1B9A !important; /* Borde púrpura */
+    border-radius: 6px !important; /* Radio más pequeño */
+    padding: 8px 18px !important; 
+    cursor: pointer !important;
+    font-weight: bold !important;
+    font-size: 0.9em !important; /* Fuente más pequeña */
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.7px !important;
+    min-width: 160px; /* Ancho mínimo reducido */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 5px !important; /* Margen reducido */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.cards-area > button:hover:not(:disabled),
+.cards-area > a.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+/* Botón "¡Iniciar Batalla!" (ID: game-area) */
+#game-area { 
+    background-image: linear-gradient(145deg, #F9D923, #B8860B) !important;
+    border-color: #B8860B !important;
+    color: #101020 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4), 0 0 10px #F9D923 !important;
+}
+#game-area:hover:not(:disabled),
+#game-area:focus:not(:disabled) {
+    background-image: linear-gradient(145deg, #FFEA70, #CF9710) !important;
+    border-color: #FFEA70 !important;
+    color: #000000 !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 15px #FFEA70, inset 0 0 5px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Botón "Finalizar" (ID: finalize-button) */
+#finalize-button { 
+    background-image: linear-gradient(145deg, #C62828, #8E0000) !important;
+    border-color: #8E0000 !important;
+    color: #E0E0E0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(198, 40, 40, 0.5) !important;
+}
+#finalize-button:hover:not(:disabled),
+#finalize-button:focus:not(:disabled) {
+    background-image: linear-gradient(145deg, #E53935, #B71C1C) !important;
+    border-color: #E53935 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 0 12px rgba(229, 57, 53, 0.7) !important;
+}
+
+/* Estilo para botones deshabilitados */
+.cards-area > button:disabled,
+.cards-area > a.btn:disabled { /* Si el enlace 'Ir a la Batalla' se deshabilita con una clase .disabled */
+    background-image: none !important;
+    background-color: #3a3a3a !important; /* Más oscuro para deshabilitado */
+    color: #666 !important; 
+    border-color: #2c2c2c !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.4) !important; 
+    cursor: not-allowed !important;
+    opacity: 0.5; 
+    transform: none !important;
 }

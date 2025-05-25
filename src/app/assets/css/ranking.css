@@ -1,53 +1,155 @@
+/* ../css/ranking.css */
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #222;
-    color: #ddd;
+    background-image: url('https://wallpapers.com/images/featured/720p-5wfq1i9etj969c3k.jpg'); /* Fondo temático */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #080618; /* Color base si la imagen no carga */
+    color: #E0E0E0; /* Texto claro general */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 25px; /* Padding general para el contenido */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido principal de la página */
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 h1 {
+    color: #F9D923; /* Dorado Yu-Gi-Oh! */
     text-align: center;
-    color: #e53935;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-size: 2.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 6px #F9D923, 0 0 10px #000000, 2px 2px 3px #000000;
 }
 
-table {
+/* --- Cajas de Resumen (Victorias, Empates, Derrotas) --- */
+#summary-boxes {
+    /* El HTML ya tiene display: flex; gap: 20px; margin-bottom: 20px; */
+    /* Podemos añadir justify-content para centrar las cajas si no ocupan todo el ancho */
+    justify-content: center;
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #333;
-    border: 1px solid #555;
+    max-width: 700px; /* Un ancho máximo para las cajas de resumen */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-th, td {
-    padding: 12px 15px;
+#summary-boxes > div {
+    background-color: rgba(25, 32, 56, 0.9); /* Azul oscuro místico */
+    border: 2px solid #4A0E7A !important; /* Borde púrpura, !important para anular inline */
+    border-radius: 10px;
+    padding: 15px !important; /* !important para anular inline */
+    width: auto !important; /* Permitir que crezca con flex */
+    min-width: 140px; /* Ancho mínimo */
+    flex: 1; /* Para que las cajas compartan el espacio disponible */
+    max-width: 200px; /* Pero no sean demasiado anchas */
+    text-align: center !important; /* !important para anular inline */
+    box-shadow: 0 3px 7px rgba(0,0,0,0.5), inset 0 0 8px rgba(74,14,122,0.4);
+    color: #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#summary-boxes h3 {
+    color: #F9D923; /* Dorado para los títulos de las cajas */
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#summary-boxes p {
+    color: #FFFFFF; /* Números en blanco brillante */
+    font-size: 2em; /* Números más grandes */
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 0 0 5px #00A99D; /* Un ligero brillo turquesa */
+}
+
+/* --- Tabla de Ranking --- */
+table#ranking-table {
+    width: 100%;
+    max-width: 900px; /* Ancho máximo para la tabla */
+    border-collapse: collapse; /* Anula cellspacing="0" y cellpadding="8" */
+    margin-top: 30px;
+    background-color: rgba(10, 10, 25, 0.88); /* Fondo muy oscuro para la tabla */
+    border: 3px solid #F9D923; /* Borde dorado principal */
+    border-radius: 10px; /* Bordes redondeados para la tabla completa */
+    box-shadow: 0 0 15px rgba(249, 217, 35, 0.3);
+    overflow: hidden; /* Para que el border-radius afecte a las celdas */
+}
+
+table#ranking-table th,
+table#ranking-table td {
+    padding: 12px 18px;
     text-align: left;
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid #4A0E7A; /* Líneas divisorias púrpuras */
+    color: #D0D0D0; /* Color de texto general para celdas */
 }
 
-th {
-    background-color: #444;
-    color: #ddd;
+table#ranking-table th {
+    background-color: #2A094A; /* Púrpura oscuro para cabeceras */
+    color: #F9D923; /* Texto dorado para cabeceras */
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #F9D923; /* Borde inferior dorado más grueso para la cabecera */
+}
+table#ranking-table td:first-child,
+table#ranking-table th:first-child {
+    text-align: center; /* Centrar la columna de posición (#) */
+}
+table#ranking-table td:nth-child(3), /* Victorias */
+table#ranking-table td:nth-child(4), /* Empates */
+table#ranking-table td:nth-child(5) { /* Derrotas */
+    text-align: center;
+    font-weight: bold;
 }
 
-tr:hover {
-    background-color: #444;
+
+table#ranking-table tbody tr:hover {
+    background-color: rgba(74, 14, 122, 0.4); /* Púrpura más claro al pasar el ratón */
+    color: #FFFFFF;
 }
 
-/* Estilos para el botón "Regresar al inicio" */
-button {
-    background-color: #e53935; /* Color rojo para el botón */
-    color: #ddd;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease; /* Transición suave */
+table#ranking-table tbody tr:last-child td {
+    border-bottom: none; /* Quitar borde inferior de la última fila */
 }
 
-button:hover {
-    background-color: #b71c1c; /* Un rojo más oscuro al pasar el ratón */
+
+/* --- Botón "Regresar al inicio" --- */
+body > button[onclick*="playerPanel.html"] { /* Selector más específico para el botón de regreso */
+    background-image: linear-gradient(145deg, #6A1B9A, #4A0E7A) !important;
+    background-color: #6A1B9A !important; /* Fallback */
+    color: #E0E0E0 !important;
+    border: 1px solid #8E24AA !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(106, 27, 154, 0.5) !important;
+    padding: 10px 25px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    font-size: 1em !important;
+    font-weight: bold;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 30px; /* Más espacio arriba del botón */
+    min-width: 200px;
+}
+
+body > button[onclick*="playerPanel.html"]:hover,
+body > button[onclick*="playerPanel.html"]:focus {
+    background-image: linear-gradient(145deg, #8E24AA, #5E35B1) !important;
+    background-color: #8E24AA !important; /* Fallback */
+    color: #FFFFFF !important;
+    border-color: #CF9710 !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 0 12px rgba(142, 36, 170, 0.7) !important;
+    transform: translateY(-2px);
 }

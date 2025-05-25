@@ -1,17 +1,21 @@
+/* ../css/home.css */
+
 body {
     background-color: #080618; /* Azul noche muy oscuro, casi negro */
     color: #E0E0E0; /* Texto claro, un gris suave */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex; /* Usamos flex para centrar el home-page-container */
+    display: flex; 
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    padding: 20px; /* Espacio alrededor si el contenido es más pequeño que la ventana */
-    background-image: url('https://i.pinimg.com/originals/9f/0a/cb/9f0acb155199a89f2a4b8c9392e9651f.gif'); /* Fondo animado de duelo */
+    padding: 20px;
+    /* --- MODIFICADO: Imagen de fondo actualizada --- */
+    background-image: url('https://wallpapers.com/images/featured/720p-5wfq1i9etj969c3k.jpg'); /* Imagen de fondo consistente */
     background-size: cover;
-    background-position: center;
-    background-blend-mode: screen;
+    background-position: center center; /* Centrar la imagen */
+    background-attachment: fixed; /* Fondo fijo al hacer scroll */
+    background-blend-mode: luminosity; /* Un modo de mezcla diferente para variar, prueba también 'screen' o quítalo si no te gusta */
 }
 
 .home-page-container {
@@ -22,22 +26,22 @@ body {
 }
 
 .home-card {
-    background-color: rgba(15, 22, 46, 0.88); /* Azul oscuro semi-transparente */
-    border: 3px solid #F9D923; /* Borde dorado brillante */
+    background-color: rgba(15, 22, 46, 0.9); /* Un poco más opaco para mejor contraste */
+    border: 3px solid #F9D923; 
     border-radius: 15px;
-    box-shadow: 0 0 15px #F9D923, 0 0 30px #f9d8236c, inset 0 0 10px rgba(249, 217, 35, 0.3);
-    padding: 40px; /* Más padding interno */
+    box-shadow: 0 0 20px #F9D923, 0 0 35px rgba(249, 217, 35, 0.4), inset 0 0 12px rgba(249, 217, 35, 0.25); /* Sombra más pronunciada */
+    padding: 40px; 
     width: 100%;
-    max-width: 600px; /* Ancho máximo para el card */
+    max-width: 600px; 
     text-align: center;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(5px); /* Un poco más de blur */
 }
 
 .home-title {
-    color: #F9D923; /* Título dorado */
-    text-shadow: 0 0 5px #F9D923, 0 0 10px #000000, 3px 3px 3px #000000; /* Sombra más pronunciada */
-    margin-bottom: 40px; /* Más espacio debajo del título */
-    font-size: 3.5em; /* Título más grande y épico */
+    color: #F9D923; 
+    text-shadow: 0 0 6px #F9D923, 0 0 12px #000000, 3px 3px 4px #000000; /* Sombra ajustada */
+    margin-bottom: 40px; 
+    font-size: 3.5em; 
     letter-spacing: 2px;
     font-weight: bold;
     text-transform: uppercase;
@@ -48,54 +52,55 @@ body {
     color: #E0E0E0;
     border: none;
     border-radius: 8px;
-    padding: 12px 28px; /* Buen tamaño para botones clickeables */
+    padding: 12px 28px; 
     cursor: pointer;
     font-weight: bold;
-    font-size: 1.1em; /* Tamaño de fuente para botones */
+    font-size: 1.1em; 
     transition: all 0.3s ease;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
-    min-width: 180px; /* Ancho mínimo para que los botones no sean demasiado pequeños */
+    min-width: 180px; 
 }
 
 /* Botón Jugar (Principal - Dorado) */
 .btn-play {
     background: linear-gradient(145deg, #F9D923, #B8860B);
-    color: #101020; /* Texto oscuro para contraste con dorado */
+    color: #101020 !important; /* Asegurar contraste */
     box-shadow: 0 2px 5px rgba(0,0,0,0.4), 0 0 10px #F9D923;
 }
 
 .btn-play:hover, .btn-play:focus {
-    background: linear-gradient(145deg, #FFEA70, #CF9710); /* Dorado más brillante */
-    color: #000000;
+    background: linear-gradient(145deg, #FFEA70, #CF9710); 
+    color: #000000 !important; /* Asegurar contraste */
     box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 15px #FFEA70, inset 0 0 5px rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
 }
 
 /* Botón Ranking (Secundario - Púrpura) */
 .btn-ranking {
-    background: linear-gradient(145deg, #6A1B9A, #4A0E7A); /* Gradiente púrpura místico */
+    background: linear-gradient(145deg, #6A1B9A, #4A0E7A); 
+    color: #E0E0E0 !important; /* Asegurar contraste */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(106, 27, 154, 0.5);
 }
 
 .btn-ranking:hover, .btn-ranking:focus {
-    background: linear-gradient(145deg, #8E24AA, #5E35B1); /* Púrpura más brillante */
-    color: #FFFFFF;
+    background: linear-gradient(145deg, #8E24AA, #5E35B1); 
+    color: #FFFFFF !important; /* Asegurar contraste */
     box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 0 12px rgba(142, 36, 170, 0.7);
     transform: translateY(-2px);
 }
 
 /* Botón Cerrar Sesión (Terciario/Acción especial - Rojo Oscuro/Carmesí) */
 .btn-logout {
-    background: linear-gradient(145deg, #C62828, #8E0000); /* Rojo oscuro "peligroso" */
-    color: #E0E0E0;
+    background: linear-gradient(145deg, #C62828, #8E0000); 
+    color: #E0E0E0 !important; /* Asegurar contraste */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(198, 40, 40, 0.5);
 }
 
 .btn-logout:hover, .btn-logout:focus {
-    background: linear-gradient(145deg, #E53935, #B71C1C); /* Rojo más intenso */
-    color: #FFFFFF;
+    background: linear-gradient(145deg, #E53935, #B71C1C); 
+    color: #FFFFFF !important; /* Asegurar contraste */
     box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 0 12px rgba(229, 57, 53, 0.7);
     transform: translateY(-2px);
 }

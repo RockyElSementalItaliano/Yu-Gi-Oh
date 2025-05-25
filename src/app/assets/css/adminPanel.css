@@ -1,46 +1,111 @@
+/* ../css/adminPanel.css */
+
 body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #222;
-            color: #ddd;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-        }
-        h1 {
-            color: #e53935;
-            margin-bottom: 30px;
-        }
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1000px;
-        }
-        .card {
-            background-color: #333;
-            border: 1px solid #555;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            transition: transform 0.2s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-        }
-        .card a {
-            display: block;
-            font-size: 1.2rem;
-            color: #e53935;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        .card a:hover {
-            text-decoration: underline;
-        }
+    background-image: url('https://wallpapers.com/images/featured/720p-5wfq1i9etj969c3k.jpg'); /* Fondo temático consistente */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #080618; /* Color base oscuro si la imagen no carga */
+    color: #E0E0E0; /* Texto claro general */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 25px; /* Padding general para el contenido */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido principal de la página */
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+h1 { /* Título "Dashboard Administrativo" */
+    color: #F9D923; /* Dorado Yu-Gi-Oh! */
+    text-align: center;
+    margin-bottom: 35px; /* Más espacio */
+    font-size: 3em; /* Tamaño prominente */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 7px rgba(249, 217, 35, 0.7), 0 0 12px #000000, 3px 3px 5px #000000;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Tarjetas un poco más anchas como mínimo */
+    gap: 30px; /* Más espacio entre tarjetas */
+    width: 100%;
+    max-width: 1200px; /* Permitir un layout más ancho si hay espacio */
+    margin-top: 20px;
+}
+
+.card {
+    background-color: rgba(20, 25, 50, 0.9); /* Azul oscuro místico, ligeramente más opaco */
+    border: 2px solid #6A1B9A; /* Borde púrpura principal */
+    border-radius: 12px; /* Bordes más redondeados */
+    padding: 25px 30px; /* Más padding interno */
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4), 
+                inset 0 0 10px rgba(106, 27, 154, 0.3),  /* Sombra interna púrpura */
+                0 0 10px rgba(106, 27, 154, 0.2);      /* Ligero resplandor púrpura */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Para espaciar título y botón */
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.03); /* Efecto de elevación y escala más notorio */
+    border-color: #F9D923; /* Borde dorado al hacer hover */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5), 
+                inset 0 0 12px rgba(249, 217, 35, 0.2), /* Sombra interna dorada */
+                0 0 20px rgba(249, 217, 35, 0.3);      /* Resplandor dorado */
+}
+
+.card h2 {
+    color: #F9D923; /* Títulos de las tarjetas en dorado */
+    font-size: 1.7em; /* Tamaño de fuente para los títulos de tarjeta */
+    margin-bottom: 20px; /* Espacio debajo del título de la tarjeta */
+    text-shadow: 1px 1px 3px #000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card a {
+    display: inline-block; /* Para que el padding y el centrado funcionen bien */
+    background: linear-gradient(145deg, #6A1B9A, #4A0E7A); /* Gradiente púrpura para los enlaces/botones */
+    color: #E0E0E0 !important; /* Texto claro, !important para anular especificidad si es necesario */
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 15px; /* Espacio entre el título h2 y el enlace/botón */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(106, 27, 154, 0.6);
+    transition: all 0.3s ease;
+    border: 1px solid transparent; /* Para que el borde en hover no cause un salto */
+}
+
+.card a:hover,
+.card a:focus {
+    background: linear-gradient(145deg, #8E24AA, #5E35B1); /* Púrpura más brillante al pasar el ratón */
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 15px rgba(142, 36, 170, 0.8);
+    transform: translateY(-2px) scale(1.02); /* Ligero levantamiento y escala */
+    text-decoration: none;
+    border-color: #CF9710; /* Borde dorado sutil al hacer hover */
+}
+
+/* Estilo específico para el botón de Cerrar Sesión si se quiere diferente */
+.card a[href="login.html"] {
+    background: linear-gradient(145deg, #C62828, #8E0000); /* Gradiente rojo para cerrar sesión */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(198, 40, 40, 0.6);
+}
+
+.card a[href="login.html"]:hover,
+.card a[href="login.html"]:focus {
+    background: linear-gradient(145deg, #E53935, #B71C1C); /* Rojo más intenso al pasar el ratón */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 15px rgba(229, 57, 53, 0.8);
+    border-color: #F9D923; /* Borde dorado al hacer hover */
+}
