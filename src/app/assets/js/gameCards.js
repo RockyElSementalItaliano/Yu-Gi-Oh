@@ -15,8 +15,8 @@ async function fetchAttributes() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const player1CardsContainer = document.getElementById('player1-cards');
-    const player2CardsContainer = document.getElementById('player2-cards');
+    const player1CardsContainer = document.querySelector('#player1-cards.cards-container');
+    const player2CardsContainer = document.querySelector('#player2-cards.cards-container');
     const gameAreaBtn = document.getElementById('game-area');
     const finalizeBtn = document.getElementById('finalize-button');
 
@@ -60,41 +60,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         const selectedCards = JSON.parse(selectedCardsJSON);
 
         // Limpiar contenedores
-        player1CardsContainer.querySelectorAll('.card-space').forEach(space => space.innerHTML = '');
-        player2CardsContainer.querySelectorAll('.card-space').forEach(space => space.innerHTML = '');
+        player1CardsContainer.innerHTML = '';
+        player2CardsContainer.innerHTML = '';
 
         // Renderizar cartas Jugador 1
-        selectedCards[1].forEach((warrior, index) => {
+        selectedCards[1].forEach((warrior) => {
             const powerName = getAttributeNameById(powers, warrior.power_id);
             const spellName = getAttributeNameById(spells, warrior.spell_id);
             const typeName = getAttributeNameById(types, warrior.type_warrior_id);
 
             const card = createWarriorCard(warrior, powerName, spellName, typeName);
-            const containerDiv = document.createElement('div');
-            containerDiv.classList.add('card-container');
-            containerDiv.appendChild(card);
-            const spaces = player1CardsContainer.querySelectorAll('.card-space');
-            const space = spaces[index];
-            if (space) {
-                space.appendChild(containerDiv);
-            }
+            player1CardsContainer.appendChild(card);
         });
 
         // Renderizar cartas Jugador 2
-        selectedCards[2].forEach((warrior, index) => {
+        selectedCards[2].forEach((warrior) => {
             const powerName = getAttributeNameById(powers, warrior.power_id);
             const spellName = getAttributeNameById(spells, warrior.spell_id);
             const typeName = getAttributeNameById(types, warrior.type_warrior_id);
 
             const card = createWarriorCard(warrior, powerName, spellName, typeName);
-            const containerDiv = document.createElement('div');
-            containerDiv.classList.add('card-container');
-            containerDiv.appendChild(card);
-            const spaces = player2CardsContainer.querySelectorAll('.card-space');
-            const space = spaces[index];
-            if (space) {
-                space.appendChild(containerDiv);
-            }
+            player2CardsContainer.appendChild(card);
         });
 
         gameAreaBtn.disabled = false;

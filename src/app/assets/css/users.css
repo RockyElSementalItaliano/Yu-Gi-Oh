@@ -1,77 +1,342 @@
-        body {
-            background-color: #222;
-            color: #ddd;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #e53935;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #555;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #333;
-        }
-        tr:nth-child(even) {
-            background-color: #2a2a2a;
-        }
-        button {
-            background-color: #e53935;
-            border: none;
-            color: white;
-            padding: 6px 12px;
-            margin-right: 5px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #b71c1c;
-        }
-        #edit-form {
-            display: none;
-            background-color: #333;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 400px;
-            margin: 0 auto 20px auto;
-        }
-        #edit-form input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #555;
-            background-color: #222;
-            color: #ddd;
-        }
-        #edit-form button {
-            width: 100%;
-        }
-        #back-btn {
-            display: block;
-            width: 150px;
-            margin: 0 auto 20px auto;
-            padding: 10px;
-            background-color: #e53935;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-        }
-        #back-btn:hover {
-            background-color: #b71c1c;
-        }
+body {
+    background-image: url('https://wallpapers.com/images/featured/720p-5wfq1i9etj969c3k.jpg'); /* Fondo temático consistente */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #080618; /* Color base oscuro si la imagen no carga */
+    color: #E0E0E0; /* Texto claro general */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido principal de la página */
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+h1 { /* Título Principal de la Página (ej. "Gestión de Usuarios", "Gestión de Entrenadores", "Gestión de Cartas") */
+    color: #F9D923; /* Dorado Yu-Gi-Oh! */
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 6px #F9D923, 0 0 10px #000000, 2px 2px 3px #000000;
+}
+
+/* --- BOTONES PRINCIPALES DE NAVEGACIÓN Y ACCIÓN (Fuera de Modales/Tablas) --- */
+
+/* Botón "Volver al Panel Administrativo" */
+#back-btn.btn.btn-secondary {
+    background-image: linear-gradient(145deg, #6A1B9A, #4A0E7A) !important;
+    background-color: #6A1B9A !important; /* Fallback */
+    color: #E0E0E0 !important;
+    border: 1px solid #8E24AA !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(106, 27, 154, 0.5) !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-size: 0.95em !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px !important;
+    transition: all 0.3s ease !important;
+}
+
+#back-btn.btn.btn-secondary:hover,
+#back-btn.btn.btn-secondary:focus {
+    background-image: linear-gradient(145deg, #8E24AA, #5E35B1) !important;
+    background-color: #8E24AA !important;
+    color: #FFFFFF !important;
+    border-color: #CF9710 !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 0 12px rgba(142, 36, 170, 0.7) !important;
+    transform: translateY(-2px);
+}
+
+/* Botón "Crear Nueva Carta" o "Crear Entrenador" o similar (Bootstrap .btn-primary fuera de modales/tablas) */
+body > button.btn-primary[data-bs-toggle="modal"] { 
+    background-image: linear-gradient(145deg, #F9D923, #B8860B) !important;
+    background-color: #F9D923 !important; /* Fallback */
+    color: #101020 !important;
+    border: 1px solid #D4AF37 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4), 0 0 10px #F9D923 !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-size: 0.95em !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px !important;
+    transition: all 0.3s ease !important;
+}
+
+body > button.btn-primary[data-bs-toggle="modal"]:hover,
+body > button.btn-primary[data-bs-toggle="modal"]:focus {
+    background-image: linear-gradient(145deg, #FFEA70, #CF9710) !important;
+    background-color: #FFEA70 !important;
+    color: #000000 !important;
+    border-color: #F9D923 !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 15px #FFEA70, inset 0 0 5px rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-2px);
+}
+
+
+/* --- TABLAS DE GESTIÓN (Usuarios, Entrenadores, Cartas) --- */
+.table-container { 
+    background-color: rgba(15, 22, 46, 0.88);
+    border: 2px solid #4A0E7A; 
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(74, 14, 122, 0.5), inset 0 0 10px rgba(74,14,122,0.2);
+    width: 100%;
+    max-width: 1100px; 
+    margin-bottom: 30px;
+    overflow-x: auto; 
+}
+
+table#users-table,
+table#trainers-table,
+table#cards-table { 
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0;
+    margin-top: 0; 
+    background-color: rgba(10, 10, 25, 0.8); 
+    border-radius: 8px; 
+    overflow: hidden; 
+}
+
+/* Estilos para Celdas de Cabecera y Datos */
+table#users-table th, table#users-table td,
+table#trainers-table th, table#trainers-table td,
+table#cards-table th, table#cards-table td {
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #3b125b; 
+    color: #D0D0D0;
+    font-size: 0.9em;
+}
+
+/* Fondo uniforme para TODAS las filas del cuerpo de la tabla */
+table#users-table tbody td,
+table#trainers-table tbody td,
+table#cards-table tbody td {
+    background-color: rgba(20, 28, 60, 0.65) !important; /* Color uniforme */
+    color: #E0E0E0 !important;
+}
+/* Si se usa .table-striped de Bootstrap, asegurar que ambas (odd/even) tengan el mismo fondo */
+table.table-striped > tbody > tr:nth-of-type(odd) > *,
+table.table-striped > tbody > tr:nth-of-type(even) > * {
+    --bs-table-accent-bg: rgba(20, 28, 60, 0.65) !important; 
+    background-color: rgba(20, 28, 60, 0.65) !important; 
+    color: #E0E0E0 !important;
+}
+
+table#users-table tbody tr:last-child td,
+table#trainers-table tbody tr:last-child td,
+table#cards-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table#users-table thead th,
+table#trainers-table thead th,
+table#cards-table thead th {
+    background-color: #2A094A !important; 
+    color: #F9D923 !important; 
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #F9D923 !important;
+    border-left: none !important; 
+    border-right: none !important;
+    border-top: none !important;
+    white-space: nowrap; 
+}
+
+table#users-table tbody tr:hover td,
+table#trainers-table tbody tr:hover td,
+table#cards-table tbody tr:hover td { 
+    background-color: rgba(74, 14, 122, 0.7) !important; 
+    color: #FFFFFF !important;
+}
+
+/* Imágenes dentro de la tabla de entrenadores y cartas */
+table#trainers-table td img,
+table#cards-table td img { /* Aplicar a ambas tablas si muestran imágenes */
+    width: 45px; 
+    height: auto;
+    aspect-ratio: 0.71; /* Proporción de carta, o 1/1 para imágenes cuadradas de perfil */
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #F9D923; 
+    vertical-align: middle;
+    margin-right: 8px; 
+}
+
+/* Descripción en la tabla (para truncar si es muy larga) */
+table#cards-table td.description-cell { 
+    max-width: 180px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top; 
+    padding-top: 12px; 
+}
+table#cards-table td.description-cell:hover { 
+    white-space: normal;
+    overflow: visible;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    background-color: rgba(42, 9, 74, 0.95) !important; 
+    position: absolute; 
+    width: auto; 
+    max-width: 300px; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 10; 
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Botones de Acciones dentro de las tablas (Editar/Eliminar) */
+table .btn { 
+    padding: 4px 8px !important; 
+    font-size: 0.8em !important; 
+    margin-right: 4px !important;
+    border-radius: 4px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: bold;
+    min-width: 70px; 
+    border: 1px solid transparent !important;
+}
+
+table .edit-btn { 
+    background-image: linear-gradient(145deg, #00A99D, #00796B) !important; 
+    background-color: #00A99D !important;
+    color: #FFFFFF !important;
+    border-color: #00796B !important;
+}
+table .edit-btn:hover {
+    background-image: linear-gradient(145deg, #00BFB2, #00897B) !important;
+    box-shadow: 0 0 6px #00BFB2;
+}
+
+table .delete-btn { 
+    background-image: linear-gradient(145deg, #C62828, #8E0000) !important;
+    background-color: #C62828 !important;
+    color: #E0E0E0 !important;
+    border-color: #8E0000 !important;
+}
+table .delete-btn:hover {
+    background-image: linear-gradient(145deg, #E53935, #B71C1C) !important;
+    box-shadow: 0 0 6px #E53935;
+}
+
+/* --- MODALES (Creación y Edición) --- */
+.modal-dialog.modal-lg {
+    max-width: 800px; 
+}
+
+.modal-content {
+    background-color: #10081c !important; 
+    border: 2px solid #F9D923 !important; 
+    border-radius: 10px !important;
+    color: #E0E0E0 !important;
+    box-shadow: 0 5px 25px rgba(249, 217, 35, 0.3);
+}
+
+.modal-header {
+    background-color: rgba(25, 32, 56, 0.85); 
+    color: #F9D923 !important;
+    border-bottom: 1px solid rgba(249, 217, 35, 0.6) !important; 
+}
+.modal-header .modal-title {
+    color: #F9D923 !important;
+    text-shadow: 0 0 4px #F9D923;
+    font-size: 1.6em; 
+}
+.modal-header .btn-close {
+    filter: invert(1) grayscale(100%) brightness(2); 
+}
+
+.modal-body {
+    background-color: rgba(15, 22, 46, 0.9); 
+    padding: 25px;
+}
+
+.modal-body .form-label {
+    color: #C0C0C0 !important; 
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+}
+
+.modal-body .form-control,
+.modal-body .form-select,
+.modal-body textarea.form-control {
+    background-color: rgba(10, 10, 25, 0.9) !important;
+    color: #E0E0E0 !important;
+    border: 2px solid #4A0E7A !important; 
+    border-radius: 6px !important;
+    padding: 10px 15px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.modal-body .form-control:disabled { 
+    background-color: rgba(30, 30, 45, 0.85) !important;
+    color: #777777 !important; 
+    border-color: #222 !important; 
+}
+
+.modal-body .form-control:focus,
+.modal-body .form-select:focus,
+.modal-body textarea.form-control:focus {
+    outline: none !important;
+    border-color: #D4AF37 !important; 
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.35) !important; 
+    background-color: rgba(20, 20, 35, 0.98) !important;
+}
+.modal-body input[type="file"].form-control {
+    color: #999; 
+}
+.modal-body input[type="file"].form-control::file-selector-button {
+    background-image: linear-gradient(145deg, #6A1B9A, #4A0E7A);
+    color: #E0E0E0;
+    border: 1px solid #8E24AA;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.modal-body input[type="file"].form-control::file-selector-button:hover {
+    background-image: linear-gradient(145deg, #8E24AA, #5E35B1);
+    border-color: #CF9710;
+}
+
+.modal-body .form-select option { 
+    background-color: #10081c;
+    color: #E0E0E0;
+}
+
+/* Botones dentro de los Modales (Creación y Edición para todas las entidades de admin) */
+#create-card-form .btn, #edit-card-form .btn,
+#create-trainer-form .btn, #edit-trainer-form .btn,
+#edit-user-form .btn { 
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: bold !important;
+    font-size: 1em !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 15px; 
+    margin-right: 10px;
+    min-width: 120px;
+    border: none !important;
+}
+
+/* Botón primario (Crear/Guardar) en todos los modales de formulario */
+#create-card-form button[type="submit"].btn-primary, /* ID de botón específico: #submit-btn */
+#edit-card-form button[type="submit"].

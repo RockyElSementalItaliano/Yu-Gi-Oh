@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="language" content="es" />
-    <title>Juego de Guerreros - Batalla</title>
+    <title>Yu Gi Oh - Batalla</title>
     <link rel="stylesheet" href="../css/game.css" />
+    <link rel="icon" href="../img/logo.png" type="image/png">
 </head>
 <body>
     <div class="container text-center mt-5">
@@ -20,32 +21,24 @@
 
             <!-- Área de cartas -->
             <div class="cards-area">
-                <!-- Contenedor de Jugador 1 -->
-                <div class="player-container">
-                    <h3>Jugador 1</h3>
-                    <div id="player1-cards" class="player-cards">
-                        <div class="card-space"></div>
-                        <div class="card-space"></div>
-                        <div class="card-space"></div>
-                        <div class="card-space"></div>
-                        <div class="card-space"></div>
+                
+                    <div class="player-container">
+                        <h3>Jugador 1</h3>
+                        <div id="player1-cards" class="cards-container">
+                        </div>
                     </div>
-                </div>
+               
 
                 <!-- Botón para iniciar batalla -->
                 <button id="game-area" class="btn-primary mt-4" disabled>¡Iniciar Batalla!</button>
 
-                <!-- Contenedor de Jugador 2 -->
-                <div class="player-container">
-                    <h3>Jugador 2</h3>
-                    <div id="player2-cards" class="player-cards">
-                        <div class="card-space"></div>
-                        <div class="card-space"></div>
-                        <div class="card-space"></div>
-                        <div class="card-space"></div>
-                        <div class="card-space"></div>
+                
+                    <div class="player-container">
+                        <h3>Jugador 2</h3>
+                        <div id="player2-cards" class="cards-container">
+                        </div>
                     </div>
-                </div>
+                
 
                 <!-- Botón para finalizar y ver resultados -->
                 <button id="finalize-button" disabled onclick="location.href='ranking.html'">Finalizar</button>

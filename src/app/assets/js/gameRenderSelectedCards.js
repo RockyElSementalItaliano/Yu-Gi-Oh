@@ -3,21 +3,24 @@ import { WarriorService } from './warriorService.js';
 document.addEventListener('DOMContentLoaded', async () => {
     const warriorService = new WarriorService();
 
-    const player1CardsContainer = document.getElementById('player1-cards');
-    const player2CardsContainer = document.getElementById('player2-cards');
+    const player1CardsContainer = document.querySelector('#player1-cards.cards-container');
+    const player2CardsContainer = document.querySelector('#player2-cards.cards-container');
     const startBattleButton = document.getElementById('game-area');
     const finalizeButton = document.getElementById('finalize-button');
 
     // Función para crear el HTML de una carta warrior para mostrar en game.html
     function createWarriorCard(warrior) {
         const card = document.createElement('div');
-        card.classList.add('card');
+        card.classList.add('card-button');
         card.dataset.id = warrior.id;
-        card.innerHTML = `
-            <img src="../img/${warrior.image_url}" alt="${warrior.name}" class="card-image" />
-            <h3 class="card-name">${warrior.name}</h3>
-            <p class="card-description">${warrior.description}</p>
-        `;
+        const img = document.createElement('img');
+        img.src = `../img/${warrior.image_url}`;
+        img.alt = warrior.name;
+        img.classList.add('ygo-card-image');
+        card.appendChild(img);
+        const name = document.createElement('h4');
+        name.textContent = warrior.name;
+        card.appendChild(name);
         return card;
     }
 

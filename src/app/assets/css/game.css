@@ -116,6 +116,14 @@ h1 { /* Título "¡Batalla en Progreso!" */
     min-height: 350px; /* Ajustado */
 }
 
+.cards-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
 .player-container {
     width: 100%;
     text-align: center;
@@ -136,58 +144,73 @@ h1 { /* Título "¡Batalla en Progreso!" */
 }
 
 /* --- CONTENEDOR DE CARTAS Y CARTAS MÁS PEQUEÑAS --- */
-.player-cards { /* Contiene las 5 .card-space */
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap; 
-    gap: 6px; /* Espacio MUY reducido entre cartas */
-    padding: 4px; 
-    background-color: rgba(0,0,0,0.35); 
-    border-radius: 5px;
-    /* Ancho para 5 cartas de 75px + 4 gaps de 6px + padding (2*4px) = 375 + 24 + 8 = 407px */
-    max-width: 407px; 
-    overflow: hidden; /* No debería haber scroll si las cartas caben */
+/* Contenedor que maneja las proporciones y disposición de las cartas */
+.cards-container { /* Contiene las cartas */
+    display: flex; /* Usamos flexbox para alinear las cartas */
+    justify-content: center; /* Centra las cartas horizontalmente */
+    flex-wrap: wrap; /* Permite que las cartas se envuelvan en varias filas */
+    gap: 6px; /* Espacio entre cartas */
+    padding: 4px; /* Espacio interno del contenedor */
+    background-color: rgba(0,0,0,0.35); /* Fondo semitransparente */
+    border-radius: 5px; /* Bordes redondeados */
+    max-width: 2000px; /* Ancho máximo del contenedor */
+    max-height: 620px; /* Altura máxima para mostrar varias filas */
+    overflow-x: hidden; /* Oculta scroll horizontal */
+    overflow-y: auto; /* Permite scroll vertical si es necesario */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño */
 }
 
-.card-space { /* Este es el contenedor de CADA carta individual */
-    width: 75px; /* Ancho de la CARTA */
-    height: 105px; /* Alto FIJO de la CARTA (proporción ~0.7 ideal para cartas) */
-    box-sizing: border-box; 
-    background-color: #0A0612; /* Fondo muy oscuro para la carta */
-    border: 1px solid #605030; /* Borde dorado/bronce muy sutil */
-    border-radius: 5px; 
+/* Contenedor individual de cada carta para controlar tamaño y alineación */
+.card-container {
+    width: 80px; /* Ancho fijo para cada carta */
+    height: 95px; /* Alto fijo para cada carta */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño */
+    margin: 3px; /* Margen entre cartas */
+    display: flex; /* Flexbox para centrar contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+/* Contenedor que define la proporción y estilo visual de cada carta */
+.card-button { /* Este es el contenedor de CADA carta individual */
+    width: 175px; /* Ancho fijo de la carta */
+    height: 258px; /* Alto fijo de la carta (proporción ~0.7) */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño */
+    background-color: #0A0612; /* Fondo oscuro para la carta */
+    border: 1px solid #605030; /* Borde sutil dorado/bronce */
+    border-radius: 5px; /* Bordes redondeados */
     padding: 3px; /* Padding interno mínimo */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; 
-    text-align: center;
-    overflow: hidden; 
-    box-shadow: 0 1px 2px rgba(0,0,0,0.7), inset 0 0 2px rgba(184, 134, 11, 0.2);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    color: #D0D0D0; /* Texto general de la carta un poco más oscuro */
-    flex-shrink: 0; 
+    display: flex; /* Flexbox para organizar contenido */
+    flex-direction: column; /* Coloca elementos en columna */
+    align-items: center; /* Centra horizontalmente */
+    justify-content: flex-start; /* Alinea al inicio verticalmente */
+    text-align: center; /* Texto centrado */
+    overflow: hidden; /* Oculta contenido que desborda */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.7), inset 0 0 2px rgba(184, 134, 11, 0.2); /* Sombra y brillo */
+    transition: transform 0.15s ease, box-shadow 0.15s ease; /* Transiciones suaves */
+    color: #D0D0D0; /* Color de texto */
+    flex-shrink: 0; /* No permite que la carta se reduzca */
 }
+/* Efecto hover para resaltar la carta */
 .card-space:hover {
-    transform: scale(1.07);
-    border-color: #F9D923; 
-    box-shadow: 0 2px 8px rgba(249, 217, 35, 0.5), 0 0 5px #F9D923;
+    transform: scale(1.07); /* Escala la carta */
+    border-color: #F9D923; /* Cambia el color del borde */
+    box-shadow: 0 2px 8px rgba(249, 217, 35, 0.5), 0 0 5px #F9D923; /* Sombra dorada */
 }
 
-/* IMAGEN DENTRO DE .card-space */
-.card-space img { /* Si tu JS inserta una <img> directamente */
-    width: 100%;  /* Ocupa el ancho del contenido de .card-space (75px - 2*3px padding = 69px) */
-    height: 65px; /* ALTURA FIJA para el área de la IMAGEN dentro de la carta */
-    object-fit: cover; /* Llena el área (69x65px), mantiene proporción, recorta excesos. */
+/* IMAGEN DENTRO DE .card-button */
+.card-button img { /* Si tu JS inserta una <img> directamente */
+    width: 100%;  /* Ocupa el ancho del contenido de .card-button (55px - 2*3px padding = 49px) */
+    height: 450px; /* ALTURA FIJA reducida para el área de la IMAGEN dentro de la carta */
+    object-fit: cover; /* Llena el área (49x45px), mantiene proporción, recorta excesos. */
                        /* Prueba 'contain' si prefieres ver toda la imagen. */
     border-radius: 2px; 
     background-color: #000; /* Visible si usas 'contain' y la imagen no llena */
     margin-bottom: 2px; /* Espacio mínimo entre imagen y nombre */
 }
 /* Si tu JS usa una clase específica para la imagen, como .ygo-card-image */
-.card-space .ygo-card-image {
+.card-button .ygo-card-image {
     width: 100%;
-    height: 65px; 
+    height: 500px; 
     object-fit: cover; 
     border-radius: 2px;
     background-color: #000;
@@ -195,36 +218,27 @@ h1 { /* Título "¡Batalla en Progreso!" */
 }
 
 
-/* NOMBRE DE LA CARTA dentro de .card-space */
+/* Nombre de la carta dentro del contenedor */
 .card-space .card-name, /* Si tu JS crea un elemento con esta clase */
 .card-space h4, /* O si es un h4 genérico */
 .card-space p:first-of-type { /* O el primer párrafo si así lo estructura el JS */
-    font-size: 0.6em; /* Muy pequeño */
-    font-weight: bold;
-    color: #E8C75A; /* Un dorado más pálido para el nombre */
+    font-size: 0.6em; /* Tamaño pequeño */
+    font-weight: bold; /* Negrita */
+    color: #E8C75A; /* Color dorado pálido */
     line-height: 1.1; 
     width: 100%; 
-    max-height: 2.2em; /* Para ~2 líneas */
-    overflow: hidden;
-    text-overflow: ellipsis; 
+    max-height: 2.2em; /* Máximo dos líneas */
+    overflow: hidden; /* Oculta texto que desborda */
+    text-overflow: ellipsis; /* Añade puntos suspensivos */
     margin-bottom: 1px;
     padding: 0 1px;
 }
 
-/* ATRIBUTOS DE LA CARTA dentro de .card-space */
+/* Atributos de la carta ocultos para mostrar solo imagen y nombre */
 .card-space .card-attributes, /* Si tu JS crea un div con esta clase */
 .card-space .card-attribute-line, /* O párrafos con esta clase */
 .card-space p:not(:first-of-type) { /* O los siguientes párrafos */
-    display: none; /* Ocultos por defecto por el tamaño tan reducido */
-    /* Si decides mostrarlos:
-    font-size: 0.5em; 
-    color: #999;
-    line-height: 1;
-    margin: 0; 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    */
+    display: none; /* Ocultos para simplificar la vista */
 }
 
 /* --- FIN DE MODIFICACIONES DE TAMAÑO DE CARTAS --- */
